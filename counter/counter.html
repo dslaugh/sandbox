@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>Counter</title>
+	<style>
+		#LeftCol {
+			float: left;
+		}
+		#RightCol {
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<div id="LeftCol">
+		<button type="button" id="CountBtn">Count</button><br />
+		<input type="checkbox" id="IsNew"><label for="IsNew">Is New</input>
+	</div>
+	<div id="RightCol">
+		<ol id="TodayCounts"></ol>
+	</div>
+
+	<script type="text/javascript" src="../patterns/custom_events.js"></script>
+	<script type="text/javascript" src="js/Count.js"></script>
+	<script type="text/javascript" src="../session_store.js"></script>
+	<script type="text/javascript" src="js/counter.js"></script>
+</body>
+</html>

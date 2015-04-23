@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+	<title>Testing</title>
+</head>
+<body>
+	<ul>
+		<li data-date='2015-02-01'>2015-02-01</li>
+		<li data-date='2015-04-01'>2015-04-01</li>
+		<li data-date='2015-06-01'>2015-06-01</li>
+		<li data-date='2015-10-01'>2015-10-01</li>
+		<li data-date='2015-01-01'>2015-01-01</li>
+		<li data-date='2015-03-01'>2015-03-01</li>
+		<li data-date='2015-09-01'>2015-09-01</li>
+	</ul>
+	<ul>
+		<li data-id='2'>2</li>
+		<li data-id='4'>4</li>
+		<li data-id='6'>6</li>
+		<li data-id='10'>10</li>
+		<li data-id='1'>1</li>
+		<li data-id='3'>3</li>
+		<li data-id='9'>9</li>
+	</ul>
+	<ul>
+		<li data-string='two'>two</li>
+		<li data-string='four'>four</li>
+		<li data-string='six'>six</li>
+		<li data-string='ten'>ten</li>
+		<li data-string='one'>one</li>
+		<li data-string='three'>three</li>
+		<li data-string='nine'>nine</li>
+	</ul>
+
+	<script src="sandbox.js"></script>
+	<script src="test.js"></script>
+	<script>
+		var S = sandbox.sandbox;
+		S.sortElementsByAttribute('data-date', 'asc', 'string');
+		S.sortElementsByAttribute('data-id', 'asc', 'int');
+		S.sortElementsByAttribute('data-string', 'asc', 'string');
+
+		console.log(x.test2());
+	</script>
+
+
+	<button id="addNewObserver" type="button">Add New Observer checkbox</button>
+	<input id="mainCheckbox" type="checkbox" />
+	<div id="observersContainer"></div>
+
+	<div>
+		<div>
+			Most Recently Added User: <span id="MostRecent">(None)</span>
+		</div>
+		<ul id="UsersList"></ul>
+	</div>
+
+
+
+	<script src="patterns/observer.js"></script>
+	<script src="patterns/pubsub.js"></script>
+	<script src="loc_store.js"></script>
+	<script src="allonge/allonge.js"></script>
+	<script>
+		function extend(extension, obj) {
+			for (var key in extension) {
+				obj[key] = extension[key];
+			}
+		}
+
+		var controlCheckbox = document.getElementById('mainCheckbox');
+		var addBtn = document.getElementById('addNewObserver');
+		var container = document.getElementById('observersContainer');
+
+		extend(new observer.Subject(), controlCheckbox);
+		controlCheckbox.onclick = function() {
+			controlCheckbox.notify(controlCheckbox.checked);
+		};
+
+		addBtn.onclick = addNewObserver;
+
+		function addNewObserver() {
+			var check = document.createElement('input');
+			check.type = 'checkbox';
+
+			extend(new observer.Observer(), check);
+
+			check.update = function(value) {
+				this.checked = value;
+			};
+
+			controlCheckbox.addObserver(check);
+
+			container.appendChild(check);
+		}
+
+
+		var usersListElement = document.querySelector('#UsersList');
+		var userAdded = new PubSub();
+
+		var addUser = function(user) {
+			userAdded.publish(user);
+		};
+
+		var updateMostRecentUser = function() {
+			document.querySelector('#MostRecent').innerHTML = sessionStorage.mostRecentUser;
+		}
+
+		function addUserToList(user) {
+			var newUser = document.createElement('li');
+			newUser.innerHTML = user;
+			usersListElement.appendChild(newUser);
+		}
+
+		function addUserToLocalStorage(user) {
+			sessionStorage.mostRecentUser = user;
+		}
+
+		userAdded.subscribe(addUserToList);
+		userAdded.subscribe(addUserToLocalStorage);
+		userAdded.subscribe(updateMostRecentUser);
+
+
+		var user = {
+			id: void 0,
+			name: void 0,
+			options: [],
+			logUser: function() {
+				console.log(this.id + ": " + this.name);
+			}
+		};
+
+		var x = Object.create(user);
+		var y = Object.create(user);
+
+		x.id = 1;
+		y.id = 2;
+		x.options.push('hello');
+
+		console.log(x);
+		console.log(y);
+
+		function User() {
+			this.options = [];
+
+			this.id = void 0;
+			this.name = void 0;
+			this.logUser = function() {
+				console.log(this.id + ': ' + this.name);
+			};
+
+			return this;
+		}
+
+		var a = new User();
+		var b = new User();
+		a.options.push('hello');
+		console.log(a);
+		console.log(b)
+
+
+	</script>
+
+
+
+</body>
+</html>
