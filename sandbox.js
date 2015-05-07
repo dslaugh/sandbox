@@ -233,21 +233,13 @@ if (typeof exports !== 'undefined') {
 						return b - a;
 					}
 				} else {
+					var ret = 0;
 					if (direction === 'asc') {
-						if (a > b) {
-							return 1;
-						} else {
-							return -1;
-						}
-						return 0;
+						ret = (a > b) ?  1 : -1;
 					} else {
-						if (a > b) {
-							return -1;
-						} else {
-							return 1;
-						}
-						return 0;
+						ret (a > b) ? -1 : 1;
 					}
+					return ret;
 				}
 				
 			});

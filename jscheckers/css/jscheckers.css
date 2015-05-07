@@ -1,0 +1,33 @@
+#CheckerBoard {
+	width: 560px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	box-shadow: 3px 3px 3px #666;
+}
+.board-square {
+	position: relative;
+	display: inline-block;
+	height: 70px;
+	width: 70px;
+}
+.gray {
+	background-color: #ccc;
+}
+.white {
+	background-color: #fff;
+}
+.black-checker:before, .red-checker:before {
+	content: '';
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+.black-checker:before {
+	background-color: #000;
+}
+.red-checker:before {
+	background-color: #f00;
+}
