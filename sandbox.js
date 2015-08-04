@@ -197,7 +197,7 @@ if (typeof exports !== 'undefined') {
 	    	};
 	    },
 	    compose: function() {
-	    	var fns = Array.prototype.slice.call(arguments);
+	    	var fns = Array.prototype.slice.call(arguments).reverse();
 	    	return function(initialArg) {
 	    		return fns.reduce(function(prev, curr) {
 	    			return curr(prev);

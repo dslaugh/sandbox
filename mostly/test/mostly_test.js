@@ -104,3 +104,10 @@ describe('Chapter 5 exercises', function() {
 		expect(actual).to.equal(expected);
 	});
 });
+
+describe('Container', function() {
+	it('Should give us a Container with a value in it.', function() {
+		var container = Container.of('fart');
+		expect(container.value).to.equal('fart');
+	});
+});

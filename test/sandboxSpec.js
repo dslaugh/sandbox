@@ -229,6 +229,17 @@ describe('Utils', function() {
 			var forty = add5Then10Then20(5);
 			expect(forty).to.equal(40);
 		});
+
+		it('functions are evaluated from right to left', function() {
+			var add2 = function(x) {return x + 2;};
+			var divide2 = function(x) {return x/2;};
+			
+			var ten = Utils.compose(divide2, add2)(18);
+			expect(ten).to.equal(10);
+
+			var eleven = Utils.compose(add2, divide2)(18);
+			expect(eleven).to.equal(11);
+		});
 	});
 
 	describe('testing', function() {

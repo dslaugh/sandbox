@@ -50,11 +50,7 @@ var mostly = (function() {
 
 	var append = R.flip(R.concat);
 	var fastestCar = R.compose(append(' is the fastest'), R.last, R.map(R.prop('name')), R.sortBy(R.prop('horsepower')));
-	// var fastestCar = function(cars) {
-	//   var sorted = R.sortBy(function(car){ return car.horsepower }, cars);
-	//   var fastest = R.last(sorted);
-	//   return fastest.name + ' is the fastest';
-	// };	
+
 
 	return {
 		words: words,
