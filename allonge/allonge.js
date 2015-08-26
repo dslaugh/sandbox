@@ -309,7 +309,6 @@ var allonge = (function() {
 
 		function curry(fn) {
 			var arity = fn.length;
-
 			return given([]);
 
 			function given(argsSoFar) {
