@@ -107,7 +107,30 @@ describe('Chapter 5 exercises', function() {
 
 describe('Container', function() {
 	it('Should give us a Container with a value in it.', function() {
-		var container = Container.of('fart');
-		expect(container.value).to.equal('fart');
+		var container = mostly.Container.of('fart');
+		expect(container.__value).to.equal('fart');
+	});
+
+	it('Should apply a function to the value in the container', function() {
+		var actual = mostly.Container.of('david').map(upper);
+		expect(actual.__value).to.equal('DAVID');
+
+		function upper(value) {
+			return value.toUpperCase();
+		}
+	});
+});
+
+describe('Maybe', function() {
+	it('Should run the function if there is a value', function() {
+		var actual = mostly.Maybe.of(null).map(add2);
+		expect(actual.__value).to.be.null;
+
+		var actual2 = mostly.Maybe.of(2).map(add2);
+		expect(actual2.__value).to.equal(4);
+
+		function add2(num) {
+			return 2 + num;
+		}
 	});
 });

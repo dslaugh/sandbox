@@ -51,6 +51,28 @@ var mostly = (function() {
 	var append = R.flip(R.concat);
 	var fastestCar = R.compose(append(' is the fastest'), R.last, R.map(R.prop('name')), R.sortBy(R.prop('horsepower')));
 
+	var Container = function(value) {
+		this.__value = value;
+	};
+	Container.of = function(value) {
+		return new Container(value);
+	};
+	Container.prototype.map = function(fn) {
+		return Container.of(fn(this.__value));
+	};
+
+	var Maybe = function(value) {
+		this.__value = value;
+	};
+	Maybe.of = function(value) {
+		return new Maybe(value);
+	}
+	Maybe.prototype.map = function(fn) {
+		if (this.__value === undefined || this.__value === null) {
+			return Maybe.of(null);
+		}
+		return Maybe.of(fn(this.__value));
+	}
 
 	return {
 		words: words,
@@ -64,7 +86,9 @@ var mostly = (function() {
 		averageDollarValue: averageDollarValue,
 		sanitizeNames: sanitizeNames,
 		availablePrices: availablePrices,
-		fastestCar: fastestCar
+		fastestCar: fastestCar,
+		Container: Container,
+		Maybe: Maybe
 	};
 
 })();
