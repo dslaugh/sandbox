@@ -27,9 +27,7 @@ var RamdaTesting = {
 		}
 		return randomizedString;
 	},
-	getTags: function(tagsData) {
-		return R.pluck('label', tagsData);
-	}
+	getTags: R.pluck('label')
 };
 
 module.exports = RamdaTesting;
