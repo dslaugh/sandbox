@@ -122,7 +122,7 @@ describe('Container', function() {
 });
 
 describe('Maybe', function() {
-	it('Should run the function if there is a value', function() {
+	it('Should apply the function if the value is not undefined or null', function() {
 		var actual = mostly.Maybe.of(null).map(add2);
 		expect(actual.__value).to.be.null;
 
