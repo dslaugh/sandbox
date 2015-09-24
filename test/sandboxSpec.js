@@ -299,4 +299,97 @@ describe('Utils', function() {
 	});
 
 
+
+});
+describe('Stubs and Mocks', function() {
+	it('playing around', function() {
+
+		var toElem = {
+			doc: [],
+			appendChild: function(element) {
+				this.doc.push(element);
+			},
+			querySelector: function(selector) {
+				var elements = this.doc.filter(function(item) {
+					return item['selector'] === selector;
+				});
+				return elements[0];
+			}
+		};
+		var elem = {
+			id: 'testelem',
+			selector: '#testelem'
+		};
+
+		append(toElem, elem);
+
+		// expect(hasChild).to.equal(elem);
+
+		function append(to, element) {
+			to.appendChild(element);
+		}
+	});
+});
+
+describe('Object.create', function() {
+	it('', function() {
+		var myProto = {
+			add: function(a, b) {
+				return a + b;
+			},
+			upper: function(str) {
+				return str.toUpperCase();
+			}
+		};
+
+		var Ob1 = Object.create(myProto);
+
+		var test1 = Ob1.add(1,3);
+		expect(test1).to.equal(4);
+		
+
+		var Ob2 = Object.create(myProto);
+
+		Ob2.add = function(a, b) {
+			return a - b;
+		}
+
+		var test2 = Ob1.add(3, 1);
+		expect(test2).to.equal(4);
+
+		var test3 = Ob2.add(3, 1);
+		expect(test3).to.equal(2);
+
+		var test4 = myProto.add(4, 2);
+		expect(test4).to.equal(6);
+	});
+});
+
+
+describe('compose', function() {
+	it('should compose', function() {
+		var compose = function() {
+			var reversedArgs = Array.prototype.slice.call(arguments).reverse();
+			return function(x) {
+				return reversedArgs.reduce(function(val, fn) {
+					return fn(val);
+				}, x);
+			}
+		};
+
+		var add2 = function(x) {
+			return x + 2;
+		};
+		var divide2 = function(x) {
+			return x / 2;
+		};
+		var divideThenAdd = compose(add2, divide2);
+		var five = divideThenAdd(6);
+
+		var addThenDivide = compose(divide2, add2);
+		var four = addThenDivide(6);
+
+		expect(five).to.equal(5);
+		expect(four).to.equal(4);
+	});
 });
