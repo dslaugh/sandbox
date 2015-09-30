@@ -393,3 +393,23 @@ describe('compose', function() {
 		expect(four).to.equal(4);
 	});
 });
+
+describe('Testing map', function() {
+	it('should add a property to ', function() {
+		var testArr = [
+			{id: 1, name: 'dave'},
+			{id: 2, name: 'steve'}
+		];
+		var expected = [
+			{id: 1, name: 'dave', status: 'hello'},
+			{id: 2, name: 'steve', status: 'hello'}
+		];
+
+		testArr.map(function(val) {
+			val.status = 'hello';
+			return val;
+		});
+
+		expect(testArr).to.eql(expected);
+	});
+});
