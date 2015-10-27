@@ -291,6 +291,7 @@ describe('2015-10-15', function() {
 						}
 					}
 				});
+				return consumer;
 			};
 
 			var obj1 = {
