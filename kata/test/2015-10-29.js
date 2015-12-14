@@ -3,6 +3,12 @@ var expect = require('chai').expect;
 describe('Kata', function() {
 	describe('compose', function() {
 		var compose = function() {
+			var fns = Array.prototype.slice.call(arguments, 0).reverse();
+			return function(initVal) {
+				return fns.reduce(function(prevVal, currVal) {
+					return currVal(prevVal);
+				}, initVal);
+			};
 		};
 
 		var add2 = function(x) {
@@ -28,6 +34,18 @@ describe('Kata', function() {
 
 	describe('curry', function() {
 		var curry = function(fn) {
+			return given([]);
+
+			function given(argsSoFar) {
+				return function() {
+					var updatedArgsSoFar = argsSoFar.concat(Array.prototype.slice.call(arguments, 0));
+					if (updatedArgsSoFar.length >= fn.length) {
+						return fn.apply(this, updatedArgsSoFar);
+					} else {
+						return given(updatedArgsSoFar);
+					}
+				};
+			}
 		};
 
 		var add = function(a, b) {
@@ -51,15 +69,34 @@ describe('Kata', function() {
 
 	describe('FP functions', function() {
 		var forEach = function(fn, arr) {
+			var i = 0;
+			var len = arr.length;
+			for(; i<len; i++) {
+				fn(arr[i]);
+			}
 		};
 
 		var reduce = function(fn, initVal, arr) {
+			forEach(function(currVal) {
+				initVal = fn(initVal, currVal);
+			}, arr);
+			return initVal;
 		};
 
 		var map = function(fn, arr) {
+			return reduce(function(prevVal, currVal) {
+				prevVal.push(fn(currVal));
+				return prevVal;
+			}, [], arr);
 		};
 
 		var filter = function(fn, arr) {
+			return reduce(function(prevVal, currVal) {
+				if (fn(currVal)) {
+					prevVal.push(currVal);
+				}
+				return prevVal;
+			}, [], arr);
 		};
 
 		it('should loop through an array', function() {
@@ -108,29 +145,37 @@ describe('Kata', function() {
 	});
 
 	describe('extend', function() {
-		var extend = function(consumer) {
-		};
-
-		var obj1 = {
-			fname: 'david'
-		};
-		var obj2 = {
-			lname: 'slaugh'
-		};
-		var obj3 = {
-			email: 'dslaugh@gmail.com'
-		};
-
-		var expected = {
-			fname: 'david',
-			lname: 'slaugh',
-			email: 'dslaugh@gmail.com'
-		};
-
 		it('should extend an object', function() {
-			var returnedObj = extend(obj1, obj2, obj3);
+			var extend = function(consumer) {
+				var providers = Array.prototype.slice.call(arguments, 1);
+				providers.forEach(function(provider) {
+					for(key in provider) {
+						if (provider.hasOwnProperty(key)) {
+							consumer[key] = provider[key];
+						}
+					}
+				});
+				return consumer;
+			};
+
+			var obj1 = {
+				fname: 'david',
+			};
+			var obj2 = {
+				lname: 'slaugh'
+			};
+			var obj3 = {
+				email: 'dslaugh@gmail.com'
+			};
+
+			var expected = {
+				fname: 'david',
+				lname: 'slaugh',
+				email: 'dslaugh@gmail.com'
+			};
+
+			extend(obj1, obj2, obj3);
 			expect(obj1).to.eql(expected);
-			expect(returnedObj).to.eql(expected);
 		});
 	});
 
