@@ -227,6 +227,8 @@ if (typeof exports !== 'undefined') {
 				b = b.getAttribute(attributeName);
 
 				if (dataType === 'int') {
+					a = parseInt(a, 10);
+					b = parseInt(b, 10);
 					if (direction === 'asc') {
 						return a - b;
 					} else {
