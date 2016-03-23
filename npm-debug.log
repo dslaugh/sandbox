@@ -1,0 +1,715 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'color-thief' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.1
+4 verbose install initial load of /Users/dslaugh/nodejs/sandbox/package.json
+5 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/babel/package.json
+6 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/chai/package.json
+7 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/chai-as-promised/package.json
+8 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/knex/package.json
+9 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/mysql/package.json
+10 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/q/package.json
+11 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/ramda/package.json
+12 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/sinon/package.json
+13 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/tape/package.json
+14 verbose installManyTop reading scoped package data from /Users/dslaugh/nodejs/sandbox/node_modules/xhr2/package.json
+15 info package.json q@1.2.0 license should be a valid SPDX license expression
+16 verbose readDependencies loading dependencies from /Users/dslaugh/nodejs/sandbox/package.json
+17 silly cache add args [ 'color-thief', null ]
+18 verbose cache add spec color-thief
+19 silly cache add parsed spec Result {
+19 silly cache add   raw: 'color-thief',
+19 silly cache add   scope: null,
+19 silly cache add   name: 'color-thief',
+19 silly cache add   rawSpec: '',
+19 silly cache add   spec: '*',
+19 silly cache add   type: 'range' }
+20 silly addNamed color-thief@*
+21 verbose addNamed "*" is a valid semver range for color-thief
+22 silly addNameRange { name: 'color-thief', range: '*', hasData: false }
+23 silly mapToRegistry name color-thief
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry uri https://registry.npmjs.org/color-thief
+27 verbose addNameRange registry:https://registry.npmjs.org/color-thief not in flight; fetching
+28 verbose request uri https://registry.npmjs.org/color-thief
+29 verbose request no auth needed
+30 info attempt registry request try #1 at 12:54:19 PM
+31 verbose request id 0dae0b6409b31803
+32 verbose etag "BXMUJDRZLZ5AI9JSDFW56X37C"
+33 http request GET https://registry.npmjs.org/color-thief
+34 http 304 https://registry.npmjs.org/color-thief
+35 verbose headers { date: 'Tue, 15 Mar 2016 18:54:19 GMT',
+35 verbose headers   via: '1.1 varnish',
+35 verbose headers   'cache-control': 'max-age=300',
+35 verbose headers   etag: '"BXMUJDRZLZ5AI9JSDFW56X37C"',
+35 verbose headers   age: '0',
+35 verbose headers   connection: 'keep-alive',
+35 verbose headers   'x-served-by': 'cache-lax1423-LAX',
+35 verbose headers   'x-cache': 'MISS',
+35 verbose headers   'x-cache-hits': '0',
+35 verbose headers   'x-timer': 'S1458068059.242681,VS0,VE89',
+35 verbose headers   vary: 'Accept' }
+36 silly get cb [ 304,
+36 silly get   { date: 'Tue, 15 Mar 2016 18:54:19 GMT',
+36 silly get     via: '1.1 varnish',
+36 silly get     'cache-control': 'max-age=300',
+36 silly get     etag: '"BXMUJDRZLZ5AI9JSDFW56X37C"',
+36 silly get     age: '0',
+36 silly get     connection: 'keep-alive',
+36 silly get     'x-served-by': 'cache-lax1423-LAX',
+36 silly get     'x-cache': 'MISS',
+36 silly get     'x-cache-hits': '0',
+36 silly get     'x-timer': 'S1458068059.242681,VS0,VE89',
+36 silly get     vary: 'Accept' } ]
+37 verbose etag https://registry.npmjs.org/color-thief from cache
+38 verbose get saving color-thief to /Users/dslaugh/.npm/registry.npmjs.org/color-thief/.cache.json
+39 silly addNameRange number 2 { name: 'color-thief', range: '*', hasData: true }
+40 silly addNameRange versions [ 'color-thief', [ '2.0.1', '2.1.0', '2.2.0', '2.2.1' ] ]
+41 silly addNamed color-thief@2.2.1
+42 verbose addNamed "2.2.1" is a plain semver version for color-thief
+43 silly cache afterAdd color-thief@2.2.1
+44 verbose afterAdd /Users/dslaugh/.npm/color-thief/2.2.1/package/package.json not in flight; writing
+45 verbose afterAdd /Users/dslaugh/.npm/color-thief/2.2.1/package/package.json written
+46 silly install resolved [ { name: 'color-thief',
+46 silly install resolved     version: '2.2.1',
+46 silly install resolved     description: 'A script for grabbing the color palette from an image. Uses Javascript and the canvas tag to make it happen.',
+46 silly install resolved     main: 'js/color-thief.js',
+46 silly install resolved     repository: { type: 'git', url: 'git://github.com/null2/color-thief.git' },
+46 silly install resolved     scripts: { test: 'nodeunit test/*-test.js --reporter minimal' },
+46 silly install resolved     author: '',
+46 silly install resolved     license: 'BSD-2-Clause',
+46 silly install resolved     bugs: { url: 'https://github.com/null2/color-thief/issues' },
+46 silly install resolved     dependencies: { canvas: '~1.2.0' },
+46 silly install resolved     devDependencies: { nodeunit: '~0.8.2' },
+46 silly install resolved     gitHead: 'cc4161185651730320e5a10959990684114465d0',
+46 silly install resolved     homepage: 'https://github.com/null2/color-thief#readme',
+46 silly install resolved     _id: 'color-thief@2.2.1',
+46 silly install resolved     _shasum: '31807b5536463aa13a60987da56a441e70e61cd4',
+46 silly install resolved     _from: 'color-thief@*',
+46 silly install resolved     _npmVersion: '3.3.3',
+46 silly install resolved     _nodeVersion: '4.1.2',
+46 silly install resolved     _npmUser: { name: 'jo', email: 'schmidt@netzmerk.com' },
+46 silly install resolved     dist:
+46 silly install resolved      { shasum: '31807b5536463aa13a60987da56a441e70e61cd4',
+46 silly install resolved        tarball: 'http://registry.npmjs.org/color-thief/-/color-thief-2.2.1.tgz' },
+46 silly install resolved     maintainers: [ [Object] ],
+46 silly install resolved     directories: {},
+46 silly install resolved     _resolved: 'https://registry.npmjs.org/color-thief/-/color-thief-2.2.1.tgz',
+46 silly install resolved     readme: 'ERROR: No README data found!' } ]
+47 info install color-thief@2.2.1 into /Users/dslaugh/nodejs/sandbox
+48 info installOne color-thief@2.2.1
+49 verbose installOne of color-thief to /Users/dslaugh/nodejs/sandbox not in flight; installing
+50 verbose lock using /Users/dslaugh/.npm/_locks/color-thief-6f2095dd144e704c.lock for /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+51 silly install write writing color-thief 2.2.1 to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+52 verbose unbuild node_modules/color-thief
+53 silly gentlyRm /Users/dslaugh/nodejs/sandbox/node_modules/color-thief is being purged from base /Users/dslaugh/nodejs/sandbox
+54 verbose gentlyRm don't care about contents; nuking /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+55 verbose tar unpack /Users/dslaugh/.npm/color-thief/2.2.1/package.tgz
+56 verbose tar unpacking to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+57 silly gentlyRm /Users/dslaugh/nodejs/sandbox/node_modules/color-thief is being purged
+58 verbose gentlyRm don't care about contents; nuking /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+59 silly gunzTarPerm modes [ '755', '644' ]
+60 silly gunzTarPerm extractEntry package.json
+61 silly gunzTarPerm extractEntry .npmignore
+62 silly gunzTarPerm extractEntry demo.js
+63 silly gunzTarPerm extractEntry node-demo.js
+64 silly gunzTarPerm extractEntry test/color-thief-test.js
+65 silly gunzTarPerm extractEntry img/dark_checkered_bg.png
+66 silly gunzTarPerm extractEntry img/drag_placeholder.png
+67 silly gunzTarPerm extractEntry img/photo1.jpg
+68 silly gunzTarPerm extractEntry img/photo2.jpg
+69 silly gunzTarPerm extractEntry img/photo3.jpg
+70 silly gunzTarPerm extractEntry README.markdown
+71 silly gunzTarPerm extractEntry js/color-thief.js
+72 silly gunzTarPerm extractEntry js/libs/jquery-2.0.2.min.js
+73 silly gunzTarPerm extractEntry js/libs/jquery.lettering.js
+74 silly gunzTarPerm extractEntry js/libs/modernizr.custom.js
+75 silly gunzTarPerm extractEntry js/libs/mustache.js
+76 silly gunzTarPerm extractEntry component.json
+77 silly gunzTarPerm extractEntry css/app.css
+78 silly gunzTarPerm extractEntry sass/app.sass
+79 silly gunzTarPerm extractEntry index.html
+80 verbose write writing to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/package.json
+81 info preinstall color-thief@2.2.1
+82 verbose readDependencies loading dependencies from /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/package.json
+83 silly prepareForInstallMany adding canvas@~1.2.0 from color-thief dependencies
+84 verbose readDependencies loading dependencies from /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/package.json
+85 silly cache add args [ 'canvas@~1.2.0', null ]
+86 verbose cache add spec canvas@~1.2.0
+87 silly cache add parsed spec Result {
+87 silly cache add   raw: 'canvas@~1.2.0',
+87 silly cache add   scope: null,
+87 silly cache add   name: 'canvas',
+87 silly cache add   rawSpec: '~1.2.0',
+87 silly cache add   spec: '>=1.2.0 <1.3.0',
+87 silly cache add   type: 'range' }
+88 silly addNamed canvas@>=1.2.0 <1.3.0
+89 verbose addNamed ">=1.2.0 <1.3.0" is a valid semver range for canvas
+90 silly addNameRange { name: 'canvas', range: '>=1.2.0 <1.3.0', hasData: false }
+91 silly mapToRegistry name canvas
+92 silly mapToRegistry using default registry
+93 silly mapToRegistry registry https://registry.npmjs.org/
+94 silly mapToRegistry uri https://registry.npmjs.org/canvas
+95 verbose addNameRange registry:https://registry.npmjs.org/canvas not in flight; fetching
+96 verbose request uri https://registry.npmjs.org/canvas
+97 verbose request no auth needed
+98 info attempt registry request try #1 at 12:54:19 PM
+99 verbose etag "EEZ6EPCT2RP1XFT6TEV26AR9B"
+100 http request GET https://registry.npmjs.org/canvas
+101 http 304 https://registry.npmjs.org/canvas
+102 verbose headers { date: 'Tue, 15 Mar 2016 18:54:19 GMT',
+102 verbose headers   via: '1.1 varnish',
+102 verbose headers   'cache-control': 'max-age=300',
+102 verbose headers   etag: '"EEZ6EPCT2RP1XFT6TEV26AR9B"',
+102 verbose headers   age: '140',
+102 verbose headers   connection: 'keep-alive',
+102 verbose headers   'x-served-by': 'cache-lax1434-LAX',
+102 verbose headers   'x-cache': 'HIT',
+102 verbose headers   'x-cache-hits': '1',
+102 verbose headers   'x-timer': 'S1458068059.610488,VS0,VE0',
+102 verbose headers   vary: 'Accept' }
+103 silly get cb [ 304,
+103 silly get   { date: 'Tue, 15 Mar 2016 18:54:19 GMT',
+103 silly get     via: '1.1 varnish',
+103 silly get     'cache-control': 'max-age=300',
+103 silly get     etag: '"EEZ6EPCT2RP1XFT6TEV26AR9B"',
+103 silly get     age: '140',
+103 silly get     connection: 'keep-alive',
+103 silly get     'x-served-by': 'cache-lax1434-LAX',
+103 silly get     'x-cache': 'HIT',
+103 silly get     'x-cache-hits': '1',
+103 silly get     'x-timer': 'S1458068059.610488,VS0,VE0',
+103 silly get     vary: 'Accept' } ]
+104 verbose etag https://registry.npmjs.org/canvas from cache
+105 verbose get saving canvas to /Users/dslaugh/.npm/registry.npmjs.org/canvas/.cache.json
+106 silly addNameRange number 2 { name: 'canvas', range: '>=1.2.0 <1.3.0', hasData: true }
+107 silly addNameRange versions [ 'canvas',
+107 silly addNameRange   [ '0.0.1',
+107 silly addNameRange     '0.0.2',
+107 silly addNameRange     '0.0.3',
+107 silly addNameRange     '0.0.4',
+107 silly addNameRange     '0.0.5',
+107 silly addNameRange     '0.0.6',
+107 silly addNameRange     '0.0.7',
+107 silly addNameRange     '0.0.8',
+107 silly addNameRange     '0.1.0',
+107 silly addNameRange     '0.2.0',
+107 silly addNameRange     '0.2.1',
+107 silly addNameRange     '0.3.0',
+107 silly addNameRange     '0.3.1',
+107 silly addNameRange     '0.3.2',
+107 silly addNameRange     '0.3.3',
+107 silly addNameRange     '0.4.0',
+107 silly addNameRange     '0.4.1',
+107 silly addNameRange     '0.4.2',
+107 silly addNameRange     '0.4.3',
+107 silly addNameRange     '0.5.0',
+107 silly addNameRange     '0.5.1',
+107 silly addNameRange     '0.5.2',
+107 silly addNameRange     '0.5.3',
+107 silly addNameRange     '0.5.4',
+107 silly addNameRange     '0.6.0',
+107 silly addNameRange     '0.7.0',
+107 silly addNameRange     '0.7.1',
+107 silly addNameRange     '0.7.2',
+107 silly addNameRange     '0.7.3',
+107 silly addNameRange     '0.8.0',
+107 silly addNameRange     '0.8.1',
+107 silly addNameRange     '0.8.2',
+107 silly addNameRange     '0.8.3',
+107 silly addNameRange     '0.9.0',
+107 silly addNameRange     '0.10.0',
+107 silly addNameRange     '0.10.1',
+107 silly addNameRange     '0.10.2',
+107 silly addNameRange     '0.10.3',
+107 silly addNameRange     '0.11.0',
+107 silly addNameRange     '0.11.1',
+107 silly addNameRange     '0.11.2',
+107 silly addNameRange     '0.11.3',
+107 silly addNameRange     '0.12.0',
+107 silly addNameRange     '0.12.1',
+107 silly addNameRange     '0.13.0',
+107 silly addNameRange     '0.13.1',
+107 silly addNameRange     '1.0.0',
+107 silly addNameRange     '1.0.1',
+107 silly addNameRange     '1.0.2',
+107 silly addNameRange     '1.0.3',
+107 silly addNameRange     '1.0.4',
+107 silly addNameRange     '1.1.0',
+107 silly addNameRange     '1.1.1',
+107 silly addNameRange     '1.1.2',
+107 silly addNameRange     '1.1.3',
+107 silly addNameRange     '1.1.4',
+107 silly addNameRange     '1.1.5',
+107 silly addNameRange     '1.1.6',
+107 silly addNameRange     '1.2.0',
+107 silly addNameRange     '1.2.1',
+107 silly addNameRange     '1.2.2',
+107 silly addNameRange     '1.2.3',
+107 silly addNameRange     '1.2.4',
+107 silly addNameRange     '1.2.5',
+107 silly addNameRange     '1.2.6',
+107 silly addNameRange     '1.2.7',
+107 silly addNameRange     '1.2.8',
+107 silly addNameRange     '1.2.9',
+107 silly addNameRange     '1.2.10',
+107 silly addNameRange     '1.2.11',
+107 silly addNameRange     '1.3.0',
+107 silly addNameRange     '1.3.1',
+107 silly addNameRange     '1.3.2',
+107 silly addNameRange     '1.3.3',
+107 silly addNameRange     '1.3.4',
+107 silly addNameRange     '1.3.5',
+107 silly addNameRange     '1.3.6',
+107 silly addNameRange     '1.3.7',
+107 silly addNameRange     '1.3.8',
+107 silly addNameRange     '1.3.9',
+107 silly addNameRange     '1.3.10',
+107 silly addNameRange     '1.3.11',
+107 silly addNameRange     '1.3.12' ] ]
+108 silly addNamed canvas@1.2.11
+109 verbose addNamed "1.2.11" is a plain semver version for canvas
+110 silly cache afterAdd canvas@1.2.11
+111 verbose afterAdd /Users/dslaugh/.npm/canvas/1.2.11/package/package.json not in flight; writing
+112 verbose afterAdd /Users/dslaugh/.npm/canvas/1.2.11/package/package.json written
+113 silly install resolved [ { name: 'canvas',
+113 silly install resolved     description: 'Canvas graphics API backed by Cairo',
+113 silly install resolved     version: '1.2.11',
+113 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@learnboost.com' },
+113 silly install resolved     contributors: [ [Object], [Object], [Object] ],
+113 silly install resolved     keywords:
+113 silly install resolved      [ 'canvas',
+113 silly install resolved        'graphic',
+113 silly install resolved        'graphics',
+113 silly install resolved        'pixman',
+113 silly install resolved        'cairo',
+113 silly install resolved        'image',
+113 silly install resolved        'images',
+113 silly install resolved        'pdf' ],
+113 silly install resolved     homepage: 'https://github.com/Automattic/node-canvas',
+113 silly install resolved     repository:
+113 silly install resolved      { type: 'git',
+113 silly install resolved        url: 'git://github.com/Automattic/node-canvas.git' },
+113 silly install resolved     scripts:
+113 silly install resolved      { prebenchmark: 'node-gyp build',
+113 silly install resolved        benchmark: 'node benchmarks/run.js',
+113 silly install resolved        pretest: 'node-gyp build',
+113 silly install resolved        test: 'mocha test/*.test.js',
+113 silly install resolved        'pretest-server': 'node-gyp build',
+113 silly install resolved        'test-server': 'node test/server.js',
+113 silly install resolved        install: 'node-gyp rebuild' },
+113 silly install resolved     dependencies: { nan: '^2.0.9' },
+113 silly install resolved     devDependencies:
+113 silly install resolved      { 'body-parser': '^1.13.3',
+113 silly install resolved        express: '^4.13.2',
+113 silly install resolved        jade: '^1.11.0',
+113 silly install resolved        mocha: '*' },
+113 silly install resolved     engines: { node: '>=0.8.0' },
+113 silly install resolved     main: './lib/canvas.js',
+113 silly install resolved     license: 'MIT',
+113 silly install resolved     gypfile: true,
+113 silly install resolved     gitHead: '7a8e6de568d1c04eb633d4539c2fee8c69c4e337',
+113 silly install resolved     bugs: { url: 'https://github.com/Automattic/node-canvas/issues' },
+113 silly install resolved     _id: 'canvas@1.2.11',
+113 silly install resolved     _shasum: 'd12455864df5169c2a2be602fa8e0e4013a97140',
+113 silly install resolved     _from: 'canvas@>=1.2.0 <1.3.0',
+113 silly install resolved     _npmVersion: '2.14.6',
+113 silly install resolved     _nodeVersion: '4.1.2',
+113 silly install resolved     _npmUser: { name: 'linusu', email: 'linus@folkdatorn.se' },
+113 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+113 silly install resolved     dist:
+113 silly install resolved      { shasum: 'd12455864df5169c2a2be602fa8e0e4013a97140',
+113 silly install resolved        tarball: 'http://registry.npmjs.org/canvas/-/canvas-1.2.11.tgz' },
+113 silly install resolved     directories: {},
+113 silly install resolved     _resolved: 'https://registry.npmjs.org/canvas/-/canvas-1.2.11.tgz',
+113 silly install resolved     readme: 'ERROR: No README data found!' } ]
+114 info install canvas@1.2.11 into /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+115 info installOne canvas@1.2.11
+116 verbose installOne of canvas to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief not in flight; installing
+117 verbose lock using /Users/dslaugh/.npm/_locks/canvas-39dd95b34009670f.lock for /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+118 silly install write writing canvas 1.2.11 to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+119 verbose unbuild node_modules/color-thief/node_modules/canvas
+120 silly gentlyRm /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas is being purged from base /Users/dslaugh/nodejs/sandbox
+121 verbose gentlyRm don't care about contents; nuking /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+122 verbose tar unpack /Users/dslaugh/.npm/canvas/1.2.11/package.tgz
+123 verbose tar unpacking to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+124 silly gentlyRm /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas is being purged
+125 verbose gentlyRm don't care about contents; nuking /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+126 silly gunzTarPerm modes [ '755', '644' ]
+127 silly gunzTarPerm extractEntry package.json
+128 silly gunzTarPerm extractEntry .npmignore
+129 silly gunzTarPerm extractEntry index.js
+130 silly gunzTarPerm extractEntry History.md
+131 silly gunzTarPerm extractEntry Readme.md
+132 silly gunzTarPerm extractEntry binding.gyp
+133 silly gunzTarPerm extractEntry .gitmodules
+134 silly gunzTarPerm extractEntry install
+135 silly gunzTarPerm extractEntry lib/bindings.js
+136 silly gunzTarPerm extractEntry lib/canvas.js
+137 silly gunzTarPerm extractEntry lib/context2d.js
+138 silly gunzTarPerm extractEntry lib/image.js
+139 silly gunzTarPerm extractEntry lib/jpegstream.js
+140 silly gunzTarPerm extractEntry lib/pngstream.js
+141 silly gunzTarPerm extractEntry .travis.yml
+142 silly gunzTarPerm extractEntry src/Image.cc
+143 silly gunzTarPerm extractEntry src/Canvas.cc
+144 silly gunzTarPerm extractEntry src/CanvasGradient.cc
+145 silly gunzTarPerm extractEntry src/CanvasGradient.h
+146 silly gunzTarPerm extractEntry src/CanvasPattern.cc
+147 silly gunzTarPerm extractEntry src/CanvasPattern.h
+148 silly gunzTarPerm extractEntry src/CanvasRenderingContext2d.cc
+149 silly gunzTarPerm extractEntry src/CanvasRenderingContext2d.h
+150 silly gunzTarPerm extractEntry src/FontFace.cc
+151 silly gunzTarPerm extractEntry src/FontFace.h
+152 silly gunzTarPerm extractEntry src/Canvas.h
+153 silly gunzTarPerm extractEntry src/Image.h
+154 silly gunzTarPerm extractEntry src/ImageData.cc
+155 silly gunzTarPerm extractEntry src/ImageData.h
+156 silly gunzTarPerm extractEntry src/JPEGStream.h
+157 silly gunzTarPerm extractEntry src/PNG.h
+158 silly gunzTarPerm extractEntry src/Point.h
+159 silly gunzTarPerm extractEntry src/closure.h
+160 silly gunzTarPerm extractEntry src/color.cc
+161 silly gunzTarPerm extractEntry src/color.h
+162 silly gunzTarPerm extractEntry src/init.cc
+163 silly gunzTarPerm extractEntry util/cairo_include.sh
+164 silly gunzTarPerm extractEntry util/has_cairo_freetype.sh
+165 silly gunzTarPerm extractEntry util/has_lib.sh
+166 silly gunzTarPerm extractEntry util/lib_lookup.sh
+167 verbose write writing to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/package.json
+168 info preinstall canvas@1.2.11
+169 verbose readDependencies loading dependencies from /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/package.json
+170 silly prepareForInstallMany adding nan@^2.0.9 from canvas dependencies
+171 verbose readDependencies loading dependencies from /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/package.json
+172 silly cache add args [ 'nan@^2.0.9', null ]
+173 verbose cache add spec nan@^2.0.9
+174 silly cache add parsed spec Result {
+174 silly cache add   raw: 'nan@^2.0.9',
+174 silly cache add   scope: null,
+174 silly cache add   name: 'nan',
+174 silly cache add   rawSpec: '^2.0.9',
+174 silly cache add   spec: '>=2.0.9 <3.0.0',
+174 silly cache add   type: 'range' }
+175 silly addNamed nan@>=2.0.9 <3.0.0
+176 verbose addNamed ">=2.0.9 <3.0.0" is a valid semver range for nan
+177 silly addNameRange { name: 'nan', range: '>=2.0.9 <3.0.0', hasData: false }
+178 silly mapToRegistry name nan
+179 silly mapToRegistry using default registry
+180 silly mapToRegistry registry https://registry.npmjs.org/
+181 silly mapToRegistry uri https://registry.npmjs.org/nan
+182 verbose addNameRange registry:https://registry.npmjs.org/nan not in flight; fetching
+183 verbose request uri https://registry.npmjs.org/nan
+184 verbose request no auth needed
+185 info attempt registry request try #1 at 12:54:19 PM
+186 verbose etag "9GNMF0K57Y4H80QS1L4U9QND9"
+187 http request GET https://registry.npmjs.org/nan
+188 http 304 https://registry.npmjs.org/nan
+189 verbose headers { date: 'Tue, 15 Mar 2016 18:54:19 GMT',
+189 verbose headers   via: '1.1 varnish',
+189 verbose headers   'cache-control': 'max-age=300',
+189 verbose headers   etag: '"9GNMF0K57Y4H80QS1L4U9QND9"',
+189 verbose headers   age: '259',
+189 verbose headers   connection: 'keep-alive',
+189 verbose headers   'x-served-by': 'cache-lax1430-LAX',
+189 verbose headers   'x-cache': 'HIT',
+189 verbose headers   'x-cache-hits': '11',
+189 verbose headers   'x-timer': 'S1458068059.872207,VS0,VE0',
+189 verbose headers   vary: 'Accept' }
+190 silly get cb [ 304,
+190 silly get   { date: 'Tue, 15 Mar 2016 18:54:19 GMT',
+190 silly get     via: '1.1 varnish',
+190 silly get     'cache-control': 'max-age=300',
+190 silly get     etag: '"9GNMF0K57Y4H80QS1L4U9QND9"',
+190 silly get     age: '259',
+190 silly get     connection: 'keep-alive',
+190 silly get     'x-served-by': 'cache-lax1430-LAX',
+190 silly get     'x-cache': 'HIT',
+190 silly get     'x-cache-hits': '11',
+190 silly get     'x-timer': 'S1458068059.872207,VS0,VE0',
+190 silly get     vary: 'Accept' } ]
+191 verbose etag https://registry.npmjs.org/nan from cache
+192 verbose get saving nan to /Users/dslaugh/.npm/registry.npmjs.org/nan/.cache.json
+193 silly addNameRange number 2 { name: 'nan', range: '>=2.0.9 <3.0.0', hasData: true }
+194 silly addNameRange versions [ 'nan',
+194 silly addNameRange   [ '0.3.0-wip',
+194 silly addNameRange     '0.3.0-wip2',
+194 silly addNameRange     '0.3.0',
+194 silly addNameRange     '0.3.1',
+194 silly addNameRange     '0.3.2',
+194 silly addNameRange     '0.4.0',
+194 silly addNameRange     '0.4.1',
+194 silly addNameRange     '0.4.2',
+194 silly addNameRange     '0.4.3',
+194 silly addNameRange     '0.4.4',
+194 silly addNameRange     '0.5.0',
+194 silly addNameRange     '0.5.1',
+194 silly addNameRange     '0.5.2',
+194 silly addNameRange     '0.6.0',
+194 silly addNameRange     '0.7.0',
+194 silly addNameRange     '0.7.1',
+194 silly addNameRange     '0.8.0',
+194 silly addNameRange     '1.0.0',
+194 silly addNameRange     '1.1.0',
+194 silly addNameRange     '1.1.1',
+194 silly addNameRange     '1.1.2',
+194 silly addNameRange     '1.2.0',
+194 silly addNameRange     '1.3.0',
+194 silly addNameRange     '1.4.0',
+194 silly addNameRange     '1.4.1',
+194 silly addNameRange     '1.5.0',
+194 silly addNameRange     '1.4.2',
+194 silly addNameRange     '1.4.3',
+194 silly addNameRange     '1.5.1',
+194 silly addNameRange     '1.5.2',
+194 silly addNameRange     '1.6.0',
+194 silly addNameRange     '1.5.3',
+194 silly addNameRange     '1.6.1',
+194 silly addNameRange     '1.6.2',
+194 silly addNameRange     '1.7.0',
+194 silly addNameRange     '1.8.0',
+194 silly addNameRange     '1.8.1',
+194 silly addNameRange     '1.8.2',
+194 silly addNameRange     '1.8.3',
+194 silly addNameRange     '1.8.4',
+194 silly addNameRange     '1.9.0',
+194 silly addNameRange     '2.0.0',
+194 silly addNameRange     '2.0.1',
+194 silly addNameRange     '2.0.2',
+194 silly addNameRange     '2.0.3',
+194 silly addNameRange     '2.0.4',
+194 silly addNameRange     '2.0.5',
+194 silly addNameRange     '2.0.6',
+194 silly addNameRange     '2.0.7',
+194 silly addNameRange     '2.0.8',
+194 silly addNameRange     '2.0.9',
+194 silly addNameRange     '2.1.0',
+194 silly addNameRange     '2.2.0' ] ]
+195 silly addNamed nan@2.2.0
+196 verbose addNamed "2.2.0" is a plain semver version for nan
+197 silly cache afterAdd nan@2.2.0
+198 verbose afterAdd /Users/dslaugh/.npm/nan/2.2.0/package/package.json not in flight; writing
+199 verbose afterAdd /Users/dslaugh/.npm/nan/2.2.0/package/package.json written
+200 silly install resolved [ { name: 'nan',
+200 silly install resolved     version: '2.2.0',
+200 silly install resolved     description: 'Native Abstractions for Node.js: C++ header for Node 0.8 -> 4 compatibility',
+200 silly install resolved     main: 'include_dirs.js',
+200 silly install resolved     repository: { type: 'git', url: 'git://github.com/nodejs/nan.git' },
+200 silly install resolved     scripts:
+200 silly install resolved      { test: 'tap --gc test/js/*-test.js',
+200 silly install resolved        'rebuild-tests': 'node-gyp rebuild --msvs_version=2013 --directory test',
+200 silly install resolved        docs: 'doc/.build.sh' },
+200 silly install resolved     contributors:
+200 silly install resolved      [ [Object],
+200 silly install resolved        [Object],
+200 silly install resolved        [Object],
+200 silly install resolved        [Object],
+200 silly install resolved        [Object],
+200 silly install resolved        [Object],
+200 silly install resolved        [Object] ],
+200 silly install resolved     devDependencies:
+200 silly install resolved      { bindings: '~1.2.1',
+200 silly install resolved        commander: '^2.8.1',
+200 silly install resolved        glob: '^5.0.14',
+200 silly install resolved        'node-gyp': '~3.0.1',
+200 silly install resolved        tap: '~0.7.1',
+200 silly install resolved        xtend: '~4.0.0' },
+200 silly install resolved     license: 'MIT',
+200 silly install resolved     bugs: { url: 'https://github.com/nodejs/nan/issues' },
+200 silly install resolved     homepage: 'https://github.com/nodejs/nan#readme',
+200 silly install resolved     _id: 'nan@2.2.0',
+200 silly install resolved     _shasum: '779c07135629503cf6a7b7e6aab33049b3c3853c',
+200 silly install resolved     _resolved: 'https://registry.npmjs.org/nan/-/nan-2.2.0.tgz',
+200 silly install resolved     _from: 'nan@>=2.0.9 <3.0.0',
+200 silly install resolved     _npmVersion: '3.3.6',
+200 silly install resolved     _nodeVersion: '5.0.0',
+200 silly install resolved     _npmUser: { name: 'kkoopa', email: 'bbyholm@abo.fi' },
+200 silly install resolved     dist:
+200 silly install resolved      { shasum: '779c07135629503cf6a7b7e6aab33049b3c3853c',
+200 silly install resolved        tarball: 'http://registry.npmjs.org/nan/-/nan-2.2.0.tgz' },
+200 silly install resolved     maintainers: [ [Object], [Object] ],
+200 silly install resolved     directories: {},
+200 silly install resolved     readme: 'ERROR: No README data found!' } ]
+201 info install nan@2.2.0 into /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+202 info installOne nan@2.2.0
+203 verbose installOne of nan to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas not in flight; installing
+204 verbose lock using /Users/dslaugh/.npm/_locks/nan-edeb08fc9d7b909e.lock for /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan
+205 silly install write writing nan 2.2.0 to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan
+206 verbose unbuild node_modules/color-thief/node_modules/canvas/node_modules/nan
+207 silly gentlyRm /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan is being purged from base /Users/dslaugh/nodejs/sandbox
+208 verbose gentlyRm don't care about contents; nuking /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan
+209 verbose tar unpack /Users/dslaugh/.npm/nan/2.2.0/package.tgz
+210 verbose tar unpacking to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan
+211 silly gentlyRm /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan is being purged
+212 verbose gentlyRm don't care about contents; nuking /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan
+213 silly gunzTarPerm modes [ '755', '644' ]
+214 silly gunzTarPerm extractEntry package.json
+215 silly gunzTarPerm modified mode [ 'package.json', 436, 420 ]
+216 silly gunzTarPerm extractEntry README.md
+217 silly gunzTarPerm modified mode [ 'README.md', 436, 420 ]
+218 silly gunzTarPerm extractEntry include_dirs.js
+219 silly gunzTarPerm modified mode [ 'include_dirs.js', 436, 420 ]
+220 silly gunzTarPerm extractEntry nan_converters.h
+221 silly gunzTarPerm modified mode [ 'nan_converters.h', 436, 420 ]
+222 silly gunzTarPerm extractEntry LICENSE.md
+223 silly gunzTarPerm modified mode [ 'LICENSE.md', 436, 420 ]
+224 silly gunzTarPerm extractEntry .dntrc
+225 silly gunzTarPerm modified mode [ '.dntrc', 436, 420 ]
+226 silly gunzTarPerm extractEntry appveyor.yml
+227 silly gunzTarPerm modified mode [ 'appveyor.yml', 436, 420 ]
+228 silly gunzTarPerm extractEntry doc/new.md
+229 silly gunzTarPerm modified mode [ 'doc/new.md', 436, 420 ]
+230 silly gunzTarPerm extractEntry doc/.build.sh
+231 silly gunzTarPerm modified mode [ 'doc/.build.sh', 509, 493 ]
+232 silly gunzTarPerm extractEntry doc/buffers.md
+233 silly gunzTarPerm modified mode [ 'doc/buffers.md', 436, 420 ]
+234 silly gunzTarPerm extractEntry doc/callback.md
+235 silly gunzTarPerm modified mode [ 'doc/callback.md', 436, 420 ]
+236 silly gunzTarPerm extractEntry doc/converters.md
+237 silly gunzTarPerm modified mode [ 'doc/converters.md', 436, 420 ]
+238 silly gunzTarPerm extractEntry doc/errors.md
+239 silly gunzTarPerm modified mode [ 'doc/errors.md', 436, 420 ]
+240 silly gunzTarPerm extractEntry doc/maybe_types.md
+241 silly gunzTarPerm modified mode [ 'doc/maybe_types.md', 436, 420 ]
+242 silly gunzTarPerm extractEntry doc/methods.md
+243 silly gunzTarPerm modified mode [ 'doc/methods.md', 436, 420 ]
+244 silly gunzTarPerm extractEntry doc/asyncworker.md
+245 silly gunzTarPerm modified mode [ 'doc/asyncworker.md', 436, 420 ]
+246 silly gunzTarPerm extractEntry doc/node_misc.md
+247 silly gunzTarPerm modified mode [ 'doc/node_misc.md', 436, 420 ]
+248 silly gunzTarPerm extractEntry doc/object_wrappers.md
+249 silly gunzTarPerm modified mode [ 'doc/object_wrappers.md', 436, 420 ]
+250 silly gunzTarPerm extractEntry doc/persistent.md
+251 silly gunzTarPerm modified mode [ 'doc/persistent.md', 436, 420 ]
+252 silly gunzTarPerm extractEntry doc/scopes.md
+253 silly gunzTarPerm modified mode [ 'doc/scopes.md', 436, 420 ]
+254 silly gunzTarPerm extractEntry doc/script.md
+255 silly gunzTarPerm modified mode [ 'doc/script.md', 436, 420 ]
+256 silly gunzTarPerm extractEntry doc/string_bytes.md
+257 silly gunzTarPerm modified mode [ 'doc/string_bytes.md', 436, 420 ]
+258 silly gunzTarPerm extractEntry doc/v8_internals.md
+259 silly gunzTarPerm modified mode [ 'doc/v8_internals.md', 436, 420 ]
+260 silly gunzTarPerm extractEntry doc/v8_misc.md
+261 silly gunzTarPerm modified mode [ 'doc/v8_misc.md', 436, 420 ]
+262 silly gunzTarPerm extractEntry nan.h
+263 silly gunzTarPerm modified mode [ 'nan.h', 436, 420 ]
+264 silly gunzTarPerm extractEntry nan_callbacks.h
+265 silly gunzTarPerm modified mode [ 'nan_callbacks.h', 436, 420 ]
+266 silly gunzTarPerm extractEntry nan_callbacks_12_inl.h
+267 silly gunzTarPerm modified mode [ 'nan_callbacks_12_inl.h', 436, 420 ]
+268 silly gunzTarPerm extractEntry nan_callbacks_pre_12_inl.h
+269 silly gunzTarPerm modified mode [ 'nan_callbacks_pre_12_inl.h', 436, 420 ]
+270 silly gunzTarPerm extractEntry nan_converters_43_inl.h
+271 silly gunzTarPerm modified mode [ 'nan_converters_43_inl.h', 436, 420 ]
+272 silly gunzTarPerm extractEntry nan_converters_pre_43_inl.h
+273 silly gunzTarPerm modified mode [ 'nan_converters_pre_43_inl.h', 436, 420 ]
+274 silly gunzTarPerm extractEntry nan_implementation_12_inl.h
+275 silly gunzTarPerm modified mode [ 'nan_implementation_12_inl.h', 436, 420 ]
+276 silly gunzTarPerm extractEntry nan_implementation_pre_12_inl.h
+277 silly gunzTarPerm modified mode [ 'nan_implementation_pre_12_inl.h', 436, 420 ]
+278 silly gunzTarPerm extractEntry nan_maybe_43_inl.h
+279 silly gunzTarPerm modified mode [ 'nan_maybe_43_inl.h', 436, 420 ]
+280 silly gunzTarPerm extractEntry nan_maybe_pre_43_inl.h
+281 silly gunzTarPerm modified mode [ 'nan_maybe_pre_43_inl.h', 436, 420 ]
+282 silly gunzTarPerm extractEntry nan_new.h
+283 silly gunzTarPerm modified mode [ 'nan_new.h', 436, 420 ]
+284 silly gunzTarPerm extractEntry nan_object_wrap.h
+285 silly gunzTarPerm modified mode [ 'nan_object_wrap.h', 436, 420 ]
+286 silly gunzTarPerm extractEntry nan_persistent_12_inl.h
+287 silly gunzTarPerm modified mode [ 'nan_persistent_12_inl.h', 436, 420 ]
+288 silly gunzTarPerm extractEntry nan_persistent_pre_12_inl.h
+289 silly gunzTarPerm modified mode [ 'nan_persistent_pre_12_inl.h', 436, 420 ]
+290 silly gunzTarPerm extractEntry nan_string_bytes.h
+291 silly gunzTarPerm modified mode [ 'nan_string_bytes.h', 436, 420 ]
+292 silly gunzTarPerm extractEntry nan_typedarray_contents.h
+293 silly gunzTarPerm modified mode [ 'nan_typedarray_contents.h', 436, 420 ]
+294 silly gunzTarPerm extractEntry nan_weak.h
+295 silly gunzTarPerm modified mode [ 'nan_weak.h', 436, 420 ]
+296 silly gunzTarPerm extractEntry CHANGELOG.md
+297 silly gunzTarPerm modified mode [ 'CHANGELOG.md', 436, 420 ]
+298 silly gunzTarPerm extractEntry tools/package.json
+299 silly gunzTarPerm modified mode [ 'tools/package.json', 436, 420 ]
+300 silly gunzTarPerm extractEntry tools/README.md
+301 silly gunzTarPerm modified mode [ 'tools/README.md', 436, 420 ]
+302 silly gunzTarPerm extractEntry tools/1to2.js
+303 silly gunzTarPerm modified mode [ 'tools/1to2.js', 509, 493 ]
+304 verbose write writing to /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan/package.json
+305 info preinstall nan@2.2.0
+306 verbose readDependencies loading dependencies from /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan/package.json
+307 verbose readDependencies loading dependencies from /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan/package.json
+308 silly install resolved []
+309 verbose about to build /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan
+310 info build /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan
+311 info linkStuff nan@2.2.0
+312 silly linkStuff nan@2.2.0 has /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules as its parent node_modules
+313 verbose linkBins nan@2.2.0
+314 verbose linkMans nan@2.2.0
+315 verbose rebuildBundles nan@2.2.0
+316 info install nan@2.2.0
+317 info postinstall nan@2.2.0
+318 verbose unlock done using /Users/dslaugh/.npm/_locks/nan-edeb08fc9d7b909e.lock for /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas/node_modules/nan
+319 verbose about to build /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+320 info build /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+321 info linkStuff canvas@1.2.11
+322 silly linkStuff canvas@1.2.11 has /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules as its parent node_modules
+323 verbose linkBins canvas@1.2.11
+324 verbose linkMans canvas@1.2.11
+325 verbose rebuildBundles canvas@1.2.11
+326 verbose rebuildBundles [ 'nan' ]
+327 info install canvas@1.2.11
+328 verbose unsafe-perm in lifecycle true
+329 info canvas@1.2.11 Failed to exec install script
+330 verbose unlock done using /Users/dslaugh/.npm/_locks/canvas-39dd95b34009670f.lock for /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+331 verbose about to build /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+332 verbose unlock done using /Users/dslaugh/.npm/_locks/color-thief-6f2095dd144e704c.lock for /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+333 verbose stack Error: canvas@1.2.11 install: `node-gyp rebuild`
+333 verbose stack Exit status 1
+333 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:214:16)
+333 verbose stack     at emitTwo (events.js:87:13)
+333 verbose stack     at EventEmitter.emit (events.js:172:7)
+333 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+333 verbose stack     at emitTwo (events.js:87:13)
+333 verbose stack     at ChildProcess.emit (events.js:172:7)
+333 verbose stack     at maybeClose (internal/child_process.js:818:16)
+333 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+334 verbose pkgid canvas@1.2.11
+335 verbose cwd /Users/dslaugh/nodejs/sandbox
+336 error Darwin 15.3.0
+337 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "color-thief"
+338 error node v4.2.1
+339 error npm  v2.14.7
+340 error code ELIFECYCLE
+341 error canvas@1.2.11 install: `node-gyp rebuild`
+341 error Exit status 1
+342 error Failed at the canvas@1.2.11 install script 'node-gyp rebuild'.
+342 error This is most likely a problem with the canvas package,
+342 error not with npm itself.
+342 error Tell the author that this fails on your system:
+342 error     node-gyp rebuild
+342 error You can get their info via:
+342 error     npm owner ls canvas
+342 error There is likely additional logging output above.
+343 verbose exit [ 1, true ]
+344 verbose unbuild node_modules/color-thief/node_modules/canvas
+345 info preuninstall canvas@1.2.11
+346 info uninstall canvas@1.2.11
+347 verbose unbuild rmStuff canvas@1.2.11 from /Users/dslaugh/nodejs/sandbox/node_modules
+348 verbose unbuild rmStuff in /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules
+349 info postuninstall canvas@1.2.11
+350 silly gentlyRm /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas is being purged from base /Users/dslaugh/nodejs/sandbox
+351 verbose gentlyRm don't care about contents; nuking /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+352 silly vacuum-fs purging /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules/canvas
+353 silly vacuum-fs removing /Users/dslaugh/nodejs/sandbox/node_modules/color-thief/node_modules
+354 silly vacuum-fs quitting because other entries in /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+355 verbose unbuild node_modules/color-thief
+356 info preuninstall color-thief@2.2.1
+357 info uninstall color-thief@2.2.1
+358 verbose unbuild rmStuff color-thief@2.2.1 from /Users/dslaugh/nodejs/sandbox/node_modules
+359 info postuninstall color-thief@2.2.1
+360 silly gentlyRm /Users/dslaugh/nodejs/sandbox/node_modules/color-thief is being purged from base /Users/dslaugh/nodejs/sandbox
+361 verbose gentlyRm don't care about contents; nuking /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+362 silly vacuum-fs purging /Users/dslaugh/nodejs/sandbox/node_modules/color-thief
+363 silly vacuum-fs quitting because other entries in /Users/dslaugh/nodejs/sandbox/node_modules

@@ -249,6 +249,27 @@ if (typeof exports !== 'undefined') {
 			sortedElements.forEach(function(elem) {
 				parent.appendChild(elem);
 			});
+		},
+		sortAsc: function(a, b) {
+			if (a.sortOrder < b.sortOrder) {
+				return -1;
+			} else {
+				return 1;
+			}
+		},
+		roundToDecimalPlaces: function(num, decimalPlaces) {
+			var multiple = Math.pow(10, decimalPlaces);
+			var multipleNum = num * multiple;
+			multipleNum = Math.round(multipleNum);
+			multipleNum = multipleNum / multiple;
+			return multipleNum;
+		},
+		processHexVal: function(number) {
+			var hexVal = Number(number).toString(16);
+			if (hexVal.length === 1) {
+				hexVal = '0' + hexVal;
+			}
+			return hexVal;
 		}
 
 

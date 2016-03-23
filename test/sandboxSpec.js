@@ -413,3 +413,91 @@ describe('Testing map', function() {
 		expect(testArr).to.eql(expected);
 	});
 });
+
+describe('Sorting', function() {
+	// it('should sort descending', function() {
+	// 	var arr2 = [
+	// 		{"value":45,"state":[[6,4,0],[8,5,7],[3,2,1]],"emptyRow":0,"emptyCol":2,"depth":1,"strRepresentation":"6,4,0,8,5,7,3,2,1,","path":"U","size":3},
+	// 		{"value":41,"state":[[6,4,7],[8,5,1],[3,2,0]],"emptyRow":2,"emptyCol":2,"depth":1,"strRepresentation":"6,4,7,8,5,1,3,2,0,","path":"D","size":3}
+	// 	];
+	// 	var arr = [
+	// 		{
+	// 			id: 1,
+	// 			sortOrder: 2
+	// 		},
+	// 		{
+	// 			id: 2,
+	// 			sortOrder: 1
+	// 		}
+	// 	];
+
+	// 	var expected = [
+	// 		{
+	// 			id: 2,
+	// 			sortOrder: 1
+	// 		},
+	// 		{
+	// 			id: 1,
+	// 			sortOrder: 2
+	// 		}
+	// 	];
+	// 	var sorted = arr2.sort(Utils.sortAsc);
+	// 	expect(sorted).to.eql(expected);		
+
+	// });
+});
+
+describe('roundToDecimalPlaces', function() {
+	it('should round to 2 decimal places', function() {
+		var actual = Utils.roundToDecimalPlaces(25.23454657678452435, 2);
+		expect(actual).to.equal(25.23);
+	});
+
+	it('should round up when third decimal place is 5 or larger', function() {
+		var actual = Utils.roundToDecimalPlaces(25.23554657678452435, 2);
+		expect(actual).to.equal(25.24);
+	});
+
+	it('should round to 3 decimal places', function() {
+		var actual = Utils.roundToDecimalPlaces(25.23544657678452435, 3);
+		expect(actual).to.equal(25.235);		
+	});
+
+	it('should round to 7 decimal places', function() {
+		var actual = Utils.roundToDecimalPlaces(25.23544653678452435, 7);
+		expect(actual).to.equal(25.2354465);		
+	});
+
+	it('should round to zero decimal places', function() {
+		var actual = Utils.roundToDecimalPlaces(25.23544653678452435, 0);
+		expect(actual).to.equal(25);		
+	});
+
+	it('should round to 26 if first decimal place is larger than 5', function() {
+		var actual = Utils.roundToDecimalPlaces(25.53544653678452435, 0);
+		expect(actual).to.equal(26);		
+	});
+
+});
+
+describe('processHexVal', function() {
+	it('should return 06 when given 6', function() {
+		var actual = Utils.processHexVal(6);
+		expect(actual).to.equal('06');
+	});
+
+	it('should return 0a when given 10', function() {
+		var actual = Utils.processHexVal(10);
+		expect(actual).to.equal('0a');
+	});
+
+	it('should return 0f when given 15', function() {
+		var actual = Utils.processHexVal(15);
+		expect(actual).to.equal('0f');
+	});
+
+	it('should return 10 when given 16', function() {
+		var actual = Utils.processHexVal(16);
+		expect(actual).to.equal('10');
+	});
+});

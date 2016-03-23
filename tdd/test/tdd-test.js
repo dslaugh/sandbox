@@ -6,7 +6,7 @@ var fakeXMLHttpRequest = require('../fake_xhr.js');
 
 describe('TDD', function() {
 
-	describe('Stubs and Mocs', function() {
+	describe('Stubs and Mocks', function() {
 		describe('Example of a stub', function() {
 
 			var add = function(a, b) {
