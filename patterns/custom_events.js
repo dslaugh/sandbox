@@ -11,9 +11,11 @@ var CustomEvents = function() {
 			subscribers[topic].splice(subscribers[topic].indexOf(fn), 1);
 		},
 		emit: function(topic, data) {
-			subscribers[topic].forEach(function(fn) {
-				fn(data);
-			});
+			if (subscribers[topic]) {
+				subscribers[topic].forEach(function(fn) {
+					fn(data);
+				});
+			}
 		},
 		test: function() {
 			return subscribers;
