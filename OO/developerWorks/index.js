@@ -1,45 +1,6 @@
 // http://www.ibm.com/developerworks/library/wa-protoop/
 var assert = require('chai').assert;
 
-describe('My own stuff based on what I have initally learned', function() {
-	var scorecard = {
-		id: undefined,
-		name: undefined,
-		addHole: function(hole) {
-			if (!(this.holes instanceof Array)) {
-				this.holes = [];
-			}
-			this.holes.push(hole);
-		}
-	};
-
-	var s1 = Object.create(scorecard);
-	s1.id = 1;
-	s1.name = 'Sagebrush';
-	// s1.holes = [];
-
-	var s2 = Object.create(scorecard);
-	s2.id = 2;
-	s2.name = 'Creekside';
-	s2.holes = [];
-
-
-	it('should have different id and name', function() {
-		assert.equal(s1.id, 1);
-		assert.equal(s1.name, 'Sagebrush');
-
-		assert.equal(s2.id, 2);
-		assert.equal(s2.name, 'Creekside');
-	});
-
-	it('adding a hole to one scorecard should not add it to the other', function() {
-		s1.addHole({number: 1});
-
-		assert.deepEqual(s1.holes, [{number: 1}]);
-		assert.deepEqual(s2.holes, []);
-	});
-});
-
 describe('Inheritance', function() {
 	describe('points', function() {
 		var point = {x: 0, y: 0};
