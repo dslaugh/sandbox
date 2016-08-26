@@ -1,14 +1,49 @@
 <html>
 <head>
-	<script src="http://localhost:8000/socket.io/socket.io.js"></script>
+	<!-- <script src="http://localhost:8000/socket.io/socket.io.js"></script> -->
+	<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 </head>
 <body>
 	<h1>Hello world</h1>
+	<button type="button" id="StartBtn">Start</button>
+	<button type="button" id="GetNum">Get</button>
+	<button type="button" id="StopBtn">Stop</button>
+	<div id="Num"></div>
 	<script>
-		var socket = io('http://localhost:8000');
-		socket.on('news', function(data) {
-			console.log('data', data);
+
+		$('#StartBtn').on('click', function() {
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:8000/api/start',
+				success: function(response) {
+					console.log('response', response);
+				}
+			});
 		});
+
+		$('#StopBtn').on('click', function() {
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:8000/api/stop',
+				success: function(response) {
+					console.log('response', response);
+				}
+			});
+		});
+
+		$('#GetNum').on('click', function() {
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:8000/api/getNum',
+				success: function(response) {
+					console.log('getNum response', response);
+				}
+			})
+		});
+		// var socket = io('http://localhost:8000');
+		// socket.on('news', function(data) {
+		// 	console.log('data', data);
+		// });
 	</script>
 </body>
 </html>
