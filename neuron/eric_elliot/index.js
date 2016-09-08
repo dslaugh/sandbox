@@ -31,13 +31,13 @@ function shouldTrigger(neuron) {
 
 var neuron1 = neuron([
 	synapse(.1, -.2),
-	synapse(0, 1),
+	synapse(0, 1), // no effect
 	synapse(.5, .8)
 ], .3);
 
 var neuron2 = neuron([
 	synapse(.1, -.2),
-	synapse(0, 1),
+	synapse(0, 1), // no effect
 	synapse(.5, .8)
 ], .5);
 
