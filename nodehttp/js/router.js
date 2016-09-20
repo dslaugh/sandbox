@@ -10,10 +10,6 @@ var Router = (function() {
 	function runRoute(request, response) {
 		var urlInfo = url.parse(request.url);
 		console.log('urlInfo', urlInfo);
-		console.log('routes', routes);
-
-		// console.log('dirnam', __dirname);
-
 
 		if (routes[urlInfo.pathname]) {
 			routes[urlInfo.pathname](request, response);

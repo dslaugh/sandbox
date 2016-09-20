@@ -16,6 +16,7 @@ var test = {
 	stop: function () {
 		console.log('stop function');
 		clearInterval(this.intvl);
+		this.intvl = undefined;
 	}
 };
 
