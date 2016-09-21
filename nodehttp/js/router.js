@@ -9,7 +9,7 @@ var Router = (function() {
 
 	function runRoute(request, response) {
 		var urlInfo = url.parse(request.url);
-		console.log('urlInfo', urlInfo);
+		// console.log('urlInfo', urlInfo);
 
 		if (routes[urlInfo.pathname]) {
 			routes[urlInfo.pathname](request, response);

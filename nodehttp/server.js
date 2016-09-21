@@ -20,23 +20,21 @@ var test = {
 	}
 };
 
-Router.route('/', function(request, response) {
-	var htmlfile = __dirname + '/index.html';
-	var p = new Promise(function(resolve, reject) {
-		fs.readFile(htmlfile, function(err, data) {
-			console.log('reading file');
+function loadHtmlFile(filePath) {
+	return new Promise(function(resolve, reject) {
+		fs.readFile(filePath, 'utf8', function(err, data) {
 			if (err) {
-				console.log('err');
-				reject('Error loading index.html');
+				console.log('error loading file ', err);
+				reject('Error loading ', filePath);
 			} else {
-				console.log('resolve');
 				resolve(data);
 			}
 		});
 	});
+}
 
-	p.then(function(data) {
-		console.log('here');
+Router.route('/', function(request, response) {
+	loadHtmlFile(__dirname + '/index.html').then(function(data) {
 		response.writeHead(200);
 		response.end(data);
 	})
