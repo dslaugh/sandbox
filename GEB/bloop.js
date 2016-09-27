@@ -50,6 +50,6 @@ console.log('isGoldbach', 8, isGoldbach(8));
 
 
 
-// for (var x = 1; x < 100; x++) {
-// 	console.log(x, isPrime2(x));
-// }
+for (var x = 1; x < 100; x++) {
+	console.log(x, isPrime2(x));
+}
