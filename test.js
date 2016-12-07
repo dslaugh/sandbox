@@ -22,4 +22,4 @@ function wonderous(x, z) {
 
 }
 
-wonderous(31);
+wonderous(13);

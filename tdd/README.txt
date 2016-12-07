@@ -48,3 +48,4 @@ Test Doubles
 		3. Behavior verification taps into the system's implementation by expecting 
 		   certain function calls to take place.
 		4. State verification is an observation on the direct or indirect input/output relationship.
+

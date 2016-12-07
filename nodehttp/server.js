@@ -34,7 +34,8 @@ function loadHtmlFile(filePath) {
 }
 
 Router.route('/', function(request, response) {
-	loadHtmlFile(__dirname + '/index.html').then(function(data) {
+	loadHtmlFile(__dirname + '/index.html')
+	.then(function(data) {
 		response.writeHead(200);
 		response.end(data);
 	})
