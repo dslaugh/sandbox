@@ -4,10 +4,10 @@ var promise = new Promise(function(resolve, reject) {
 
 promise.then(function(z) {
 	console.log('one');
-	return z;
+	return {z};
 })
 .then(function(b) {
-	console.log('two');
+	console.log('two', b);
 	throw new Error('dang it');
 	return b+' world';
 })
