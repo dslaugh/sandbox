@@ -1,4 +1,5 @@
 // https://code.tutsplus.com/tutorials/a-primer-on-es7-async-functions--cms-22367
+// node_modules/.bin/babel index.js -o compiled.js
 
 //function getValues() {
 //	return Promise.resolve([1,2,3,4]);
