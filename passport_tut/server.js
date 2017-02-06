@@ -1,9 +1,10 @@
 // https://www.jokecamp.com/tutorial-passportjs-authentication-in-nodejs/
 
 const express = require('express');
-const app = express();
 const passport = require('passport');
 const session = require('express-session');
+
+const app = express();
 
 const GithubStrategy = require('passport-github').Strategy;
 
@@ -29,7 +30,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((user, done) => {
 	// placeholder for custom user deserialization.
-	// maybe you are goint to get the user from mongy by id?
+	// maybe you are going to get the user from mongo by id?
 	// null is for errors
 	done(null, user);
 });
