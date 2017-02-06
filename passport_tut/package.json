@@ -1,0 +1,17 @@
+{
+  "name": "passport tutorial",
+  "version": "1.0.0",
+  "description": "Passport tutorial",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "express-session": "^1.15.0",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0"
+  }
+}
