@@ -47,6 +47,7 @@ var apiRoutes = express.Router();
 
 // route to authenticate a user (POST http://localhost:8080/api/authenticate
 apiRoutes.post('/authenticate', function(req, res) {
+  console.log('i', req.body.name);
   User.findOne({
     name: req.body.name,
   }, function(err, user) {
@@ -60,7 +61,14 @@ apiRoutes.post('/authenticate', function(req, res) {
       if (user.password !== req.body.password) {
         res.json({success: false, message: 'Wrong password.'});
       } else {
-        var token = jwt.sign(user, app.get('superSecret'), {
+        var payload = {
+          id: user._id,
+          perms: {
+            'your': true,
+            'mom': false
+          }
+        };
+        var token = jwt.sign(payload, app.get('superSecret'), {
           expiresIn: 60 * 60 * 24 // expires in 24 hours
         });
 
@@ -78,6 +86,9 @@ apiRoutes.post('/authenticate', function(req, res) {
 apiRoutes.use(function(req, res, next) {
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  var testBalls = jwt.decode(token);
+  console.log('testBalls', testBalls);
 
   // decode token
   if (token) {
