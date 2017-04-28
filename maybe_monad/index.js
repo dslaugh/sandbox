@@ -6,7 +6,7 @@ var user = {
 		address: {
 			street: '123 Fake St',
 			city: 'Exampleville',
-			province: 'NS',
+			// province: 'NS',
 			postcode: '1234'
 		}
 	},
@@ -73,7 +73,9 @@ Maybe.prototype.isNothing = function() {
 	return (this.__value === null || this.__value === undefined);
 };
 Maybe.prototype.map = function(f) {
+	console.log('map', f, this);
 	if (this.isNothing()) {
+		console.log('map isNothing');
 		return Maybe.of(null);
 	}
 	return Maybe.of(f(this.__value));
@@ -82,6 +84,7 @@ Maybe.prototype.join = function() {
 	return this.__value;
 };
 Maybe.prototype.chain = function(f) {
+	console.log('chain', f);
 	return this.map(f).join();
 };
 Maybe.prototype.orElse = function(defaultVal) {
@@ -102,16 +105,20 @@ function prop(prop, obj) {
 }
 
 function getProvinceBanner(province) {
+	console.log('getProvinceBanner', province);
 	return Maybe.of(banners[province]);
 }
 
 function getUserBanner(banners, user) {
-	return Maybe.of(user)
+	var x = Maybe.of(user)
 		.map(prop('accountDetails'))
 		.map(prop('address'))
 		.map(prop('province'))
-		.map(getProvinceBanner)
-		.orElse('/assets/banners/default.jpg')
+		.chain(getProvinceBanner)
+		// .orElse('/assets/banners/default.jpg')
+
+		// console.log('x', x);
+		return x;
 }
 
 // function getUserBanner(banners, user) {
@@ -123,6 +130,7 @@ function getUserBanner(banners, user) {
 // }
 
 var bannerSrc = getUserBanner(banners, user);
+// console.log('bannerSrc', bannerSrc);
 
 // Faking DOM
 var document = {
