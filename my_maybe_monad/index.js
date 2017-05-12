@@ -37,6 +37,10 @@ Maybe.prototype.orElse = function(elseValue) {
 	return this;
 };
 
+Maybe.prototype.value = function() {
+	return this.__value;
+}
+
 var queue = [];
 function addToQueue(value) {
 	if (!value) {
@@ -186,6 +190,19 @@ describe('My Maybe Monad', function() {
 		const val = 'Hello world';
 		maybe(val).orElse('Your mom').map(addToQueue);
 		expect(queue).to.eql(['Hello world']);		
+	});
+
+	it('implemented a value() method to return the contained value', () => {
+		// Did this trying to figure out practical ways to use the Maybe monad
+		function doSomething(val) {
+			return Maybe.of(val)
+				.map((x => x + ' there'))
+				.orElse('fart')
+				.value();
+		}
+
+		expect(doSomething('hi')).to.equal('hi there');
+		expect(doSomething(null)).to.equal('fart');
 	});
 });
 
