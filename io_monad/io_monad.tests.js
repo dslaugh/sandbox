@@ -1,8 +1,6 @@
+// https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch8.html#old-mcdonald-had-effects
+// https://glebbahmutov.com/blog/di-vs-io-monad-example/
 const expect = require('chai').expect;
-
-function IO(f) {
-	this.unsafePerformIO = f;
-}
 
 const compose = (f, g) => {
 	return function(x) {
@@ -10,9 +8,12 @@ const compose = (f, g) => {
 	}
 }
 
-IO.prototype.map = function(f) {
-	const x = this.unsafePerformIO();
-	return new IO(compose(f, this.unsafePerformIO));
+function IO(fn) {
+	this.unsafePerformIO = fn;
+}
+
+IO.prototype.map = function(fn) {
+	return new IO(compose(fn, this.unsafePerformIO));
 }
 
 describe('IO Monad', function() {
