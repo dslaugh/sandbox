@@ -68,7 +68,7 @@ describe('Either', function() {
 		it('should return a Right with an uppercase string when a string is passed', function() {
 			const actual = convertToUpper('dave');
 			const expected = Right.of('DAVE');
-			expect(actual).to.eql(actual);
+			expect(actual).to.eql(expected);
 		});
 
 		it('should return a Left of an error message about the wrong type passed', function() {
