@@ -1,0 +1,142 @@
+<html>
+<head>
+	<style>
+		#board tr td {
+			width: 50px;
+			height: 50px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<button type="button" id="resetBtn">Reset</button>
+		<span id="msg"></span>
+	</div>
+	<table border="1" id="board">
+		<tr>
+			<td id="row1-0" data-state="0"></td>
+			<td id="row1-1" data-state="0"></td>
+			<td id="row1-2" data-state="0"></td>
+		</tr>			
+		<tr>
+			<td id="row2-0" data-state="0"></td>
+			<td id="row2-1" data-state="0"></td>
+			<td id="row2-2" data-state="0"></td>
+		</tr>			
+		<tr>
+			<td id="row3-0" data-state="0"></td>
+			<td id="row3-1" data-state="0"></td>
+			<td id="row3-2" data-state="0"></td>
+		</tr>			
+	</table>
+
+	<script>
+		const CustomEvents = function() {
+			var subscribers = {};
+			return {
+				on: function(topic, fn) {
+					if (typeof topic === 'string' && typeof fn === 'function') {
+						subscribers[topic] = subscribers[topic] || [];
+						subscribers[topic].push(fn);
+					}
+				},
+				off: function(topic, fn) {
+					subscribers[topic].splice(subscribers[topic].indexOf(fn), 1);
+				},
+				emit: function(topic, data) {
+					if (subscribers[topic]) {
+						subscribers[topic].forEach(function(fn) {
+							fn(data);
+						});
+					}
+				}
+			}
+		};
+
+
+		function checkGameState(bs) {
+			const xWins = [
+				bs.row1[0] === 1 && bs.row1[1] === 1 & bs.row1[2] === 1,
+				bs.row2[0] === 1 && bs.row2[1] === 1 & bs.row2[2] === 1,
+				bs.row3[0] === 1 && bs.row3[1] === 1 & bs.row3[2] === 1,
+				bs.row1[0] === 1 && bs.row2[0] === 1 & bs.row3[0] === 1,
+				bs.row1[1] === 1 && bs.row2[1] === 1 & bs.row3[1] === 1,
+				bs.row1[2] === 1 && bs.row2[2] === 1 & bs.row3[2] === 1,
+				bs.row1[0] === 1 && bs.row2[1] === 1 & bs.row3[2] === 1,
+				bs.row1[2] === 1 && bs.row2[1] === 1 & bs.row3[0] === 1,
+			];
+
+			const oWins = [
+				bs.row1[0] === 2 && bs.row1[1] === 2 & bs.row1[2] === 2,
+				bs.row2[0] === 2 && bs.row2[1] === 2 & bs.row2[2] === 2,
+				bs.row3[0] === 2 && bs.row3[1] === 2 & bs.row3[2] === 2,
+				bs.row1[0] === 2 && bs.row2[0] === 2 & bs.row3[0] === 2,
+				bs.row1[1] === 2 && bs.row2[1] === 2 & bs.row3[1] === 2,
+				bs.row1[2] === 2 && bs.row2[2] === 2 & bs.row3[2] === 2,
+				bs.row1[0] === 2 && bs.row2[1] === 2 & bs.row3[2] === 2,
+				bs.row1[2] === 2 && bs.row2[1] === 2 & bs.row3[0] === 2,
+			];
+
+			const draw = bs.row1[0] !== 0 && bs.row1[1] !== 0 & bs.row1[2] !== 0 && 
+
+			if (xWins.some(x => x)) {
+				return 1;
+			}
+
+			if (oWins.some(x => x)) {
+				return 2;
+			}
+
+			return 0;
+		}
+
+		const gameEvents = CustomEvents();
+
+		gameEvents.on('test', () => {
+			console.log('this worked');
+		});
+
+		function getCleanBoardState() {
+			return {
+				row1: [0,0,0],
+				row2: [0,0,0],
+				row3: [0,0,0],
+			};
+		}
+
+		const boardState = getCleanBoardState();
+
+		let whosup = 1;
+		const msg = document.querySelector('#msg');
+		const board = document.querySelector('#board');
+		board.onclick = function(e) {
+			const clickedCellId = e.srcElement.id;
+			const idParts = clickedCellId.split('-');
+			const row = idParts[0];
+			const col = parseInt(idParts[1], 10);
+			const clickedCell = e.srcElement;
+			const cellState = clickedCell.getAttribute('data-state');
+			if (cellState !== '0') {
+				return;
+			}
+
+			boardState[row][col] = whosup;
+			clickedCell.setAttribute('data-state', whosup);
+			clickedCell.innerText = whosup === 1 ? 'X' : 'O';
+
+			const gameStatus = checkGameState(boardState);
+			if (gameStatus === 1) {
+				gameEvents.emit('test');
+				msg.innerText = 'X Wins';
+			} else if (gameStatus === 2) {
+				msg.innerText = 'O Wins';
+			} else {
+				console.log('No winner yet');
+			}
+
+			whosup = whosup === 1 ? 2 : 1;
+		}
+	</script>
+</body>
+</html>
