@@ -15,19 +15,19 @@
 	</div>
 	<table border="1" id="board">
 		<tr>
-			<td id="row1-0" data-state="0"></td>
-			<td id="row1-1" data-state="0"></td>
-			<td id="row1-2" data-state="0"></td>
+			<td id="cell00" data-col="0", data-row="0"></td>
+			<td id="cell10" data-col="1", data-row="0"></td>
+			<td id="cell20" data-col="2", data-row="0"></td>
 		</tr>			
 		<tr>
-			<td id="row2-0" data-state="0"></td>
-			<td id="row2-1" data-state="0"></td>
-			<td id="row2-2" data-state="0"></td>
+			<td id="cell01" data-col="0", data-row="1"></td>
+			<td id="cell11" data-col="1", data-row="1"></td>
+			<td id="cell21" data-col="2", data-row="1"></td>
 		</tr>			
 		<tr>
-			<td id="row3-0" data-state="0"></td>
-			<td id="row3-1" data-state="0"></td>
-			<td id="row3-2" data-state="0"></td>
+			<td id="cell02" data-col="0", data-row="2"></td>
+			<td id="cell12" data-col="1", data-row="2"></td>
+			<td id="cell22" data-col="2", data-row="2"></td>
 		</tr>			
 	</table>
 
@@ -53,90 +53,280 @@
 				}
 			}
 		};
+		
+		const Model = {
+			events: CustomEvents(),
 
+			initialBoardState: {
+				cell00: 0,
+				cell10: 0,
+				cell20: 0,
+				cell01: 0,
+				cell11: 0,
+				cell21: 0,
+				cell02: 0,
+				cell12: 0,
+				cell22: 0,
+			},
 
-		function checkGameState(bs) {
-			const xWins = [
-				bs.row1[0] === 1 && bs.row1[1] === 1 & bs.row1[2] === 1,
-				bs.row2[0] === 1 && bs.row2[1] === 1 & bs.row2[2] === 1,
-				bs.row3[0] === 1 && bs.row3[1] === 1 & bs.row3[2] === 1,
-				bs.row1[0] === 1 && bs.row2[0] === 1 & bs.row3[0] === 1,
-				bs.row1[1] === 1 && bs.row2[1] === 1 & bs.row3[1] === 1,
-				bs.row1[2] === 1 && bs.row2[2] === 1 & bs.row3[2] === 1,
-				bs.row1[0] === 1 && bs.row2[1] === 1 & bs.row3[2] === 1,
-				bs.row1[2] === 1 && bs.row2[1] === 1 & bs.row3[0] === 1,
-			];
+			boardState: {},
 
-			const oWins = [
-				bs.row1[0] === 2 && bs.row1[1] === 2 & bs.row1[2] === 2,
-				bs.row2[0] === 2 && bs.row2[1] === 2 & bs.row2[2] === 2,
-				bs.row3[0] === 2 && bs.row3[1] === 2 & bs.row3[2] === 2,
-				bs.row1[0] === 2 && bs.row2[0] === 2 & bs.row3[0] === 2,
-				bs.row1[1] === 2 && bs.row2[1] === 2 & bs.row3[1] === 2,
-				bs.row1[2] === 2 && bs.row2[2] === 2 & bs.row3[2] === 2,
-				bs.row1[0] === 2 && bs.row2[1] === 2 & bs.row3[2] === 2,
-				bs.row1[2] === 2 && bs.row2[1] === 2 & bs.row3[0] === 2,
-			];
+			whosup: 1,
 
-			const draw = bs.row1[0] !== 0 && bs.row1[1] !== 0 & bs.row1[2] !== 0 && 
+			gameState: 1,
 
-			if (xWins.some(x => x)) {
-				return 1;
+			updateBoardState(cellId) {
+				if (Model.boardState[cellId] !== 0) {
+					Model.events.emit('cell-occupied');
+				} else {
+					Model.boardState[cellId] = Model.whosup;
+					Model.whosup = Model.whosup === 1 ? 2 : 1;
+					Model.events.emit('board-state-updated', Model.boardState);					
+				}
+			},
+
+			initializeBoardState() {
+				Model.boardState = Object.assign({}, Model.initialBoardState);
+				Model.gameState = 1;
+				Model.whosup = 1;
+				Model.events.emit('board-state-initialized', Model.boardState);
+			},
+
+			checkGameState() {
+				console.log('boardState', Model.boardState);
+				const topRowWinner = (player) => {
+					return Model.boardState.cell00 === player && Model.boardState.cell10 === player && Model.boardState.cell20 === player;
+				};
+				const middleRowWinner = (player) => {
+					return Model.boardState.cell01 === player && Model.boardState.cell11 === player && Model.boardState.cell21 === player;
+				};
+				const bottomRowWinner = (player) => {
+					return Model.boardState.cell02 === player && Model.boardState.cell12 === player && Model.boardState.cell22 === player;
+				};
+				const leftColWinner = (player) => {
+					return Model.boardState.cell00 === player && Model.boardState.cell01 === player && Model.boardState.cell02 === player;
+				};
+				const centerColWinner = (player) => {
+					return Model.boardState.cell10 === player && Model.boardState.cell11 === player && Model.boardState.cell12 === player;
+				};
+				const rightColWinner = (player) => {
+					return Model.boardState.cell20 === player && Model.boardState.cell21 === player && Model.boardState.cell22 === player;
+				};
+				const diagonalWinner1 = (player) => {
+					return Model.boardState.cell00 === player && Model.boardState.cell11 === player && Model.boardState.cell22 === player;
+				};
+				const diagonalWinner2 = (player) => {
+					return Model.boardState.cell20 === player && Model.boardState.cell11 === player && Model.boardState.cell02 === player;
+				};
+
+				const xWins = () => {
+					return topRowWinner(1) || middleRowWinner(1) || bottomRowWinner(1) || leftColWinner(1) || centerColWinner(1) || rightColWinner(1) || diagonalWinner1(1) || diagonalWinner2(1);
+				};
+				const oWins = () => {
+					return topRowWinner(2) || middleRowWinner(2) || bottomRowWinner(2) || leftColWinner(2) || centerColWinner(2) || rightColWinner(2) || diagonalWinner1(2) || diagonalWinner2(2);
+				};
+				const isDraw = () => {
+					return Model.boardState.cell00 !== 0 && Model.boardState.cell10 !== 0 && Model.boardState.cell20 !== 0 &&
+					Model.boardState.cell01 !== 0 && Model.boardState.cell11 !== 0 && Model.boardState.cell21 !== 0 &&
+					Model.boardState.cell02 !== 0 && Model.boardState.cell12 !== 0 && Model.boardState.cell22 !== 0;
+				}
+
+				if (xWins()) {
+					Model.events.emit('game-over', 1);
+				} else if (oWins()) {
+					Model.events.emit('game-over', 2);
+				} else if (isDraw()) {
+					Model.events.emit('game-over', 0);
+				}
+
+			},
+
+			gameOver() {
+				Model.gameState = 0;
 			}
 
-			if (oWins.some(x => x)) {
-				return 2;
+		};
+
+		const View = {
+			gameBoard: document.querySelector('#board'),
+			cell00: document.querySelector('#cell00'),
+			cell10: document.querySelector('#cell10'),
+			cell20: document.querySelector('#cell20'),
+			cell01: document.querySelector('#cell01'),
+			cell11: document.querySelector('#cell11'),
+			cell21: document.querySelector('#cell21'),
+			cell02: document.querySelector('#cell02'),
+			cell12: document.querySelector('#cell12'),
+			cell22: document.querySelector('#cell22'),
+
+			resetBtn: document.querySelector('#resetBtn'),
+
+			msg: document.querySelector('#msg'),
+
+			renderBoard(boardState) {
+				console.log('Rendering board');
+				Object.keys(boardState).forEach((cellId) => {
+					if (boardState[cellId] === 1) {
+						View.setCellToX(View[cellId]);
+					} else if (boardState[cellId] === 2) {
+						View.setCellToO(View[cellId]);
+					} else {
+						View.setCellToUnoccupied(View[cellId]);
+					}
+				});
+			},
+
+			showCellOccupiedMsg() {
+				// Do nothing for now.
+				// alert('This cell ?is already occupied');
+			},
+
+			setCellToX(cell) {
+				cell.innerText = 'X';
+			},
+
+			setCellToO(cell) {
+				cell.innerText = 'O';
+			},
+
+			setCellToUnoccupied(cell) {
+				cell.innerText = '';
+			},
+
+			setMsg(msg) {
+				View.msg.innerText = `Game over. Result: ${msg}`;
+			},
+
+			gameOver(result) {
+				if (result === 0) {
+					View.setMsg('Draw');
+				} else if (result === 1) {
+					View.setMsg('X Wins!');
+				} else if (result === 2) {
+					View.setMsg('O Wins!');
+				} else {
+					View.setMsg('Something went wrong');
+				}
+			},
+
+			bindUIEvents() {
+				View.gameBoard.addEventListener('click', Controller.processCellClick);
+				View.resetBtn.addEventListener('click', Controller.resetBoard);
 			}
+		};
 
-			return 0;
-		}
+		const Controller = {
+			initialize() {
+				console.log('Initializing...', Model.gameState);
 
-		const gameEvents = CustomEvents();
+				Model.events.on('board-state-initialized', View.renderBoard);
+				Model.events.on('cell-occupied', View.showCellOccupiedMsg);
+				Model.events.on('board-state-updated', View.renderBoard);
+				Model.events.on('board-state-updated', Model.checkGameState);
+				Model.events.on('game-over', Model.gameOver);
+				Model.events.on('game-over', View.gameOver);
+				View.bindUIEvents();
+				Model.initializeBoardState();
 
-		gameEvents.on('test', () => {
-			console.log('this worked');
-		});
+				console.log('Initialization done.');
+			},
 
-		function getCleanBoardState() {
-			return {
-				row1: [0,0,0],
-				row2: [0,0,0],
-				row3: [0,0,0],
-			};
-		}
+			processCellClick(e) {
+				console.log('herdsfe', Model.gameState);
+				if (Model.gameState === 1) {
+					Model.updateBoardState(e.target.id);
+				}
+			},
 
-		const boardState = getCleanBoardState();
+			resetBoard() {
+				Model.initializeBoardState();
+				View.msg.innerText = '';
+			},
 
-		let whosup = 1;
-		const msg = document.querySelector('#msg');
-		const board = document.querySelector('#board');
-		board.onclick = function(e) {
-			const clickedCellId = e.srcElement.id;
-			const idParts = clickedCellId.split('-');
-			const row = idParts[0];
-			const col = parseInt(idParts[1], 10);
-			const clickedCell = e.srcElement;
-			const cellState = clickedCell.getAttribute('data-state');
-			if (cellState !== '0') {
-				return;
-			}
+			gameOver(result) {
+				console.log('Game over');
+				Model.setGameState(0);
+			},
 
-			boardState[row][col] = whosup;
-			clickedCell.setAttribute('data-state', whosup);
-			clickedCell.innerText = whosup === 1 ? 'X' : 'O';
+		};
 
-			const gameStatus = checkGameState(boardState);
-			if (gameStatus === 1) {
-				gameEvents.emit('test');
-				msg.innerText = 'X Wins';
-			} else if (gameStatus === 2) {
-				msg.innerText = 'O Wins';
-			} else {
-				console.log('No winner yet');
-			}
 
-			whosup = whosup === 1 ? 2 : 1;
-		}
+		// function checkGameState(bs) {
+		// 	const xWins = [
+		// 		bs.row1[0] === 1 && bs.row1[1] === 1 & bs.row1[2] === 1,
+		// 		bs.row2[0] === 1 && bs.row2[1] === 1 & bs.row2[2] === 1,
+		// 		bs.row3[0] === 1 && bs.row3[1] === 1 & bs.row3[2] === 1,
+		// 		bs.row1[0] === 1 && bs.row2[0] === 1 & bs.row3[0] === 1,
+		// 		bs.row1[1] === 1 && bs.row2[1] === 1 & bs.row3[1] === 1,
+		// 		bs.row1[2] === 1 && bs.row2[2] === 1 & bs.row3[2] === 1,
+		// 		bs.row1[0] === 1 && bs.row2[1] === 1 & bs.row3[2] === 1,
+		// 		bs.row1[2] === 1 && bs.row2[1] === 1 & bs.row3[0] === 1,
+		// 	];
+
+		// 	const oWins = [
+		// 		bs.row1[0] === 2 && bs.row1[1] === 2 & bs.row1[2] === 2,
+		// 		bs.row2[0] === 2 && bs.row2[1] === 2 & bs.row2[2] === 2,
+		// 		bs.row3[0] === 2 && bs.row3[1] === 2 & bs.row3[2] === 2,
+		// 		bs.row1[0] === 2 && bs.row2[0] === 2 & bs.row3[0] === 2,
+		// 		bs.row1[1] === 2 && bs.row2[1] === 2 & bs.row3[1] === 2,
+		// 		bs.row1[2] === 2 && bs.row2[2] === 2 & bs.row3[2] === 2,
+		// 		bs.row1[0] === 2 && bs.row2[1] === 2 & bs.row3[2] === 2,
+		// 		bs.row1[2] === 2 && bs.row2[1] === 2 & bs.row3[0] === 2,
+		// 	];
+
+		// 	const draw = 
+		// 		bs.row1[0] !== 0 && bs.row1[1] !== 0 & bs.row1[2] !== 0 && 
+		// 		bs.row2[0] !== 0 && bs.row2[1] !== 0 & bs.row2[2] !== 0 &&
+		// 		bs.row3[0] !== 0 && bs.row3[1] !== 0 & bs.row3[2] !== 0;
+
+		// 	if (xWins.some(x => x)) {
+		// 		return 1;
+		// 	}
+
+		// 	if (oWins.some(x => x)) {
+		// 		return 2;
+		// 	}
+
+		// 	if (draw) {
+		// 		return 3;
+		// 	}
+
+		// 	return 0;
+		// }
+
+
+
+		// let whosup = 1;
+		// View.gameBoard.onclick = function(e) {
+		// 	const clickedCellId = e.srcElement.id;
+		// 	const idParts = clickedCellId.split('-');
+		// 	const row = idParts[0];
+		// 	const col = parseInt(idParts[1], 10);
+		// 	const clickedCell = e.srcElement;
+		// 	const cellState = clickedCell.getAttribute('data-state');
+		// 	if (cellState !== '0') {
+		// 		return;
+		// 	}
+
+		// 	boardState[row][col] = whosup;
+		// 	clickedCell.setAttribute('data-state', whosup);
+		// 	clickedCell.innerText = whosup === 1 ? 'X' : 'O';
+
+		// 	const gameStatus = checkGameState(boardState);
+		// 	if (gameStatus === 1) {
+		// 		View.msg.innerText = 'X Wins';
+		// 	} else if (gameStatus === 2) {
+		// 		View.msg.innerText = 'O Wins';
+		// 	} else if (gameStatus === 3) {
+		// 		View.msg.innerText = 'It was a draw';
+		// 	} else {
+		// 		console.log('No winner yet');
+		// 	}
+
+		// 	whosup = whosup === 1 ? 2 : 1;
+		// }
+
+		Controller.initialize();
 	</script>
 </body>
 </html>
