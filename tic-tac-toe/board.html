@@ -15,21 +15,24 @@
 	</div>
 	<table border="1" id="board">
 		<tr>
-			<td id="cell00" data-col="0", data-row="0"></td>
-			<td id="cell10" data-col="1", data-row="0"></td>
-			<td id="cell20" data-col="2", data-row="0"></td>
+			<td id="cell00" ></td>
+			<td id="cell10" ></td>
+			<td id="cell20" ></td>
 		</tr>			
 		<tr>
-			<td id="cell01" data-col="0", data-row="1"></td>
-			<td id="cell11" data-col="1", data-row="1"></td>
-			<td id="cell21" data-col="2", data-row="1"></td>
+			<td id="cell01" ></td>
+			<td id="cell11" ></td>
+			<td id="cell21" ></td>
 		</tr>			
 		<tr>
-			<td id="cell02" data-col="0", data-row="2"></td>
-			<td id="cell12" data-col="1", data-row="2"></td>
-			<td id="cell22" data-col="2", data-row="2"></td>
+			<td id="cell02" ></td>
+			<td id="cell12" ></td>
+			<td id="cell22" ></td>
 		</tr>			
 	</table>
+	<div>
+		<button type="button" id="xGoBtn">Computer Go</button>
+	</div>
 
 	<script>
 		const CustomEvents = function() {
@@ -53,6 +56,29 @@
 				}
 			}
 		};
+
+		const locStore = (function() {
+			function set(name, data) {
+				window.localStorage.setItem(name, JSON.stringify(data)); 
+			}
+			function get(name) {
+				return JSON.parse(window.localStorage.getItem(name));
+				
+			}
+			function remove(name) {
+				window.localStorage.removeItem(name);
+			}
+			return {
+				set: set,
+				get: get,
+				remove: remove
+			};
+		})();		
+
+		const getRandomArrayElement = (arr) => {
+			const rand = Math.floor(Math.random() * arr.length);
+			return arr[rand];
+		};
 		
 		const Model = {
 			events: CustomEvents(),
@@ -69,6 +95,12 @@
 				cell22: 0,
 			},
 
+			xWins: 0,
+
+			oWins: 0,
+
+			draws: 0,
+
 			boardState: {},
 
 			whosup: 1,
@@ -76,12 +108,14 @@
 			gameState: 1,
 
 			updateBoardState(cellId) {
-				if (Model.boardState[cellId] !== 0) {
+				if (Model.gameState !== 1) {
+					return;
+				} else if (Model.boardState[cellId] !== 0) {
 					Model.events.emit('cell-occupied');
 				} else {
 					Model.boardState[cellId] = Model.whosup;
+					Model.events.emit('board-state-updated', Model.getBoardStateData());
 					Model.whosup = Model.whosup === 1 ? 2 : 1;
-					Model.events.emit('board-state-updated', Model.boardState);					
 				}
 			},
 
@@ -89,11 +123,19 @@
 				Model.boardState = Object.assign({}, Model.initialBoardState);
 				Model.gameState = 1;
 				Model.whosup = 1;
-				Model.events.emit('board-state-initialized', Model.boardState);
+				Model.events.emit('board-state-initialized', Model.getBoardStateData());
+			},
+
+			getBoardStateData() {
+				return {
+					boardState: Object.assign({}, Model.boardState),
+					player: Model.whosup,
+					boardStateString: Model.getBoardStateString(),
+				};
 			},
 
 			checkGameState() {
-				console.log('boardState', Model.boardState);
+				// console.log('boardState', Model.boardState);
 				const topRowWinner = (player) => {
 					return Model.boardState.cell00 === player && Model.boardState.cell10 === player && Model.boardState.cell20 === player;
 				};
@@ -141,9 +183,32 @@
 
 			},
 
-			gameOver() {
+			gameOver(result) {
 				Model.gameState = 0;
-			}
+				if (result === 0) {
+					Model.draws += 1;
+				} else if (result === 1) {
+					Model.xWins += 1;
+				} else {
+					Model.oWins += 1;
+				}
+
+				console.log('Score:', Model.xWins, Model.oWins, Model.draws);
+			},
+
+			getBoardStateString() {
+				let key = '';
+				key += Model.boardState.cell00;
+				key += Model.boardState.cell10;
+				key += Model.boardState.cell20;
+				key += Model.boardState.cell01;
+				key += Model.boardState.cell11;
+				key += Model.boardState.cell21;
+				key += Model.boardState.cell02;
+				key += Model.boardState.cell12;
+				key += Model.boardState.cell22;
+				return key;
+			},
 
 		};
 
@@ -163,12 +228,14 @@
 
 			msg: document.querySelector('#msg'),
 
-			renderBoard(boardState) {
-				console.log('Rendering board');
-				Object.keys(boardState).forEach((cellId) => {
-					if (boardState[cellId] === 1) {
+			xGoBtn: document.querySelector('#xGoBtn'),
+
+			renderBoard(data) {
+				// console.log('Rendering board');
+				Object.keys(data.boardState).forEach((cellId) => {
+					if (data.boardState[cellId] === 1) {
 						View.setCellToX(View[cellId]);
-					} else if (boardState[cellId] === 2) {
+					} else if (data.boardState[cellId] === 2) {
 						View.setCellToO(View[cellId]);
 					} else {
 						View.setCellToUnoccupied(View[cellId]);
@@ -212,6 +279,7 @@
 			bindUIEvents() {
 				View.gameBoard.addEventListener('click', Controller.processCellClick);
 				View.resetBtn.addEventListener('click', Controller.resetBoard);
+				View.xGoBtn.addEventListener('click', Controller.xGo);
 			}
 		};
 
@@ -225,106 +293,102 @@
 				Model.events.on('board-state-updated', Model.checkGameState);
 				Model.events.on('game-over', Model.gameOver);
 				Model.events.on('game-over', View.gameOver);
+				Model.events.on('game-over', Controller.gameOver);
 				View.bindUIEvents();
 				Model.initializeBoardState();
+				MB.initialize();
 
 				console.log('Initialization done.');
 			},
 
 			processCellClick(e) {
-				console.log('herdsfe', Model.gameState);
-				if (Model.gameState === 1) {
-					Model.updateBoardState(e.target.id);
-				}
+				Model.updateBoardState(e.target.id);
 			},
 
 			resetBoard() {
 				Model.initializeBoardState();
 				View.msg.innerText = '';
+				MB.xMoves = {};
 			},
 
 			gameOver(result) {
-				console.log('Game over');
-				Model.setGameState(0);
+				// console.log('Game over', MB.xMoves);
+				// console.log('Game over2', MB.boxes);
+				console.log('Game over3', MB.xMoves);
+				if (result === 0) { // Draw
+					Object.keys(MB.xMoves).forEach((xMove) => {
+						MB.boxes[xMove].push(MB.xMoves[xMove])
+					});					
+				} else if (result === 1) { // X wins
+					Object.keys(MB.xMoves).forEach((xMove) => {
+						MB.boxes[xMove].push(MB.xMoves[xMove])
+						MB.boxes[xMove].push(MB.xMoves[xMove])
+						MB.boxes[xMove].push(MB.xMoves[xMove])
+					});					
+				} else { // O wins
+					console.log('wtf');
+					Object.keys(MB.xMoves).forEach((xMove) => {
+						console.log('xMove', MB.boxes[xMove].length);
+						if (MB.boxes[xMove].length > 1) {
+							const beadToRemove = MB.boxes[xMove].indexOf(MB.xMoves[xMove]);
+							// console.log('beadToRemove', beadToRemove);
+							MB.boxes[xMove].splice(beadToRemove, 1);
+						} 
+					});
+				}
 			},
+
+			xGo() {
+				if (Model.gameState === 1) {
+					const randomPick = getRandomArrayElement(MB.boxes[boardStateKey]);
+					document.querySelector(`#cell${randomPick}`).click();
+					// if (Model.whosup === 1) {
+					// 	MB.xMoves[boardStateKey] = randomPick;
+					// 	// console.log('randomPick', randomPick);					
+					// }
+				}
+			},
+
 
 		};
 
+		const MB = {
+			boxes: {},
 
-		// function checkGameState(bs) {
-		// 	const xWins = [
-		// 		bs.row1[0] === 1 && bs.row1[1] === 1 & bs.row1[2] === 1,
-		// 		bs.row2[0] === 1 && bs.row2[1] === 1 & bs.row2[2] === 1,
-		// 		bs.row3[0] === 1 && bs.row3[1] === 1 & bs.row3[2] === 1,
-		// 		bs.row1[0] === 1 && bs.row2[0] === 1 & bs.row3[0] === 1,
-		// 		bs.row1[1] === 1 && bs.row2[1] === 1 & bs.row3[1] === 1,
-		// 		bs.row1[2] === 1 && bs.row2[2] === 1 & bs.row3[2] === 1,
-		// 		bs.row1[0] === 1 && bs.row2[1] === 1 & bs.row3[2] === 1,
-		// 		bs.row1[2] === 1 && bs.row2[1] === 1 & bs.row3[0] === 1,
-		// 	];
+			xMoves: {},
 
-		// 	const oWins = [
-		// 		bs.row1[0] === 2 && bs.row1[1] === 2 & bs.row1[2] === 2,
-		// 		bs.row2[0] === 2 && bs.row2[1] === 2 & bs.row2[2] === 2,
-		// 		bs.row3[0] === 2 && bs.row3[1] === 2 & bs.row3[2] === 2,
-		// 		bs.row1[0] === 2 && bs.row2[0] === 2 & bs.row3[0] === 2,
-		// 		bs.row1[1] === 2 && bs.row2[1] === 2 & bs.row3[1] === 2,
-		// 		bs.row1[2] === 2 && bs.row2[2] === 2 & bs.row3[2] === 2,
-		// 		bs.row1[0] === 2 && bs.row2[1] === 2 & bs.row3[2] === 2,
-		// 		bs.row1[2] === 2 && bs.row2[1] === 2 & bs.row3[0] === 2,
-		// 	];
+			initialize() {
+				Model.events.on('board-state-updated', MB.processPlayerPick);
+				const boxes = locStore.get('MB');
+				if (boxes) {
+					MB.boxes = boxes;
+				}
+			},
 
-		// 	const draw = 
-		// 		bs.row1[0] !== 0 && bs.row1[1] !== 0 & bs.row1[2] !== 0 && 
-		// 		bs.row2[0] !== 0 && bs.row2[1] !== 0 & bs.row2[2] !== 0 &&
-		// 		bs.row3[0] !== 0 && bs.row3[1] !== 0 & bs.row3[2] !== 0;
+			createInitialBoxValues(boardStateKey) {
+				const cellLookup = ['00','10','20','01','11','21','02','12','22'];
+				const beads = [];
+				boardStateKey.split('').forEach((x, i) => {
+					if (x === '0') {
+						beads.push(cellLookup[i]);
+					}
+				});
+				return beads;
+			},
 
-		// 	if (xWins.some(x => x)) {
-		// 		return 1;
-		// 	}
+			processPlayerPick(data) {
+				if (data.player !== 1) {
+					return;
+				}
+				console.log('processPlayerPick', data);
 
-		// 	if (oWins.some(x => x)) {
-		// 		return 2;
-		// 	}
-
-		// 	if (draw) {
-		// 		return 3;
-		// 	}
-
-		// 	return 0;
-		// }
-
-
-
-		// let whosup = 1;
-		// View.gameBoard.onclick = function(e) {
-		// 	const clickedCellId = e.srcElement.id;
-		// 	const idParts = clickedCellId.split('-');
-		// 	const row = idParts[0];
-		// 	const col = parseInt(idParts[1], 10);
-		// 	const clickedCell = e.srcElement;
-		// 	const cellState = clickedCell.getAttribute('data-state');
-		// 	if (cellState !== '0') {
-		// 		return;
-		// 	}
-
-		// 	boardState[row][col] = whosup;
-		// 	clickedCell.setAttribute('data-state', whosup);
-		// 	clickedCell.innerText = whosup === 1 ? 'X' : 'O';
-
-		// 	const gameStatus = checkGameState(boardState);
-		// 	if (gameStatus === 1) {
-		// 		View.msg.innerText = 'X Wins';
-		// 	} else if (gameStatus === 2) {
-		// 		View.msg.innerText = 'O Wins';
-		// 	} else if (gameStatus === 3) {
-		// 		View.msg.innerText = 'It was a draw';
-		// 	} else {
-		// 		console.log('No winner yet');
-		// 	}
-
-		// 	whosup = whosup === 1 ? 2 : 1;
-		// }
+				// Initialize box if it doesn't exist
+				if (MB.boxes[data.boardStateString] === undefined) {
+					MB.boxes[data.boardStateString] = MB.createInitialBoxValues(data.boardStateString);
+					console.log('MB.boxes', MB.boxes);
+				}
+			}
+		};
 
 		Controller.initialize();
 	</script>
