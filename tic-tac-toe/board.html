@@ -107,12 +107,15 @@
 
 			gameState: 1,
 
+			lastCellPlayed: undefined,
+
 			updateBoardState(cellId) {
 				if (Model.gameState !== 1) {
 					return;
 				} else if (Model.boardState[cellId] !== 0) {
 					Model.events.emit('cell-occupied');
 				} else {
+					Model.lastCellPlayed = cellId.replace('cell', '');
 					Model.boardState[cellId] = Model.whosup;
 					Model.events.emit('board-state-updated', Model.getBoardStateData());
 					Model.whosup = Model.whosup === 1 ? 2 : 1;
@@ -131,6 +134,7 @@
 					boardState: Object.assign({}, Model.boardState),
 					player: Model.whosup,
 					boardStateString: Model.getBoardStateString(),
+					cellPlayed: Model.lastCellPlayed,
 				};
 			},
 
@@ -314,7 +318,6 @@
 			gameOver(result) {
 				// console.log('Game over', MB.xMoves);
 				// console.log('Game over2', MB.boxes);
-				console.log('Game over3', MB.xMoves);
 				if (result === 0) { // Draw
 					Object.keys(MB.xMoves).forEach((xMove) => {
 						MB.boxes[xMove].push(MB.xMoves[xMove])
@@ -326,9 +329,7 @@
 						MB.boxes[xMove].push(MB.xMoves[xMove])
 					});					
 				} else { // O wins
-					console.log('wtf');
 					Object.keys(MB.xMoves).forEach((xMove) => {
-						console.log('xMove', MB.boxes[xMove].length);
 						if (MB.boxes[xMove].length > 1) {
 							const beadToRemove = MB.boxes[xMove].indexOf(MB.xMoves[xMove]);
 							// console.log('beadToRemove', beadToRemove);
@@ -340,12 +341,9 @@
 
 			xGo() {
 				if (Model.gameState === 1) {
-					const randomPick = getRandomArrayElement(MB.boxes[boardStateKey]);
+					const boardStateString = Model.getBoardStateString();
+					const randomPick = getRandomArrayElement(MB.boxes[boardStateString]);
 					document.querySelector(`#cell${randomPick}`).click();
-					// if (Model.whosup === 1) {
-					// 	MB.xMoves[boardStateKey] = randomPick;
-					// 	// console.log('randomPick', randomPick);					
-					// }
 				}
 			},
 
@@ -365,10 +363,10 @@
 				}
 			},
 
-			createInitialBoxValues(boardStateKey) {
+			createInitialBoxValues(boardStateString) {
 				const cellLookup = ['00','10','20','01','11','21','02','12','22'];
 				const beads = [];
-				boardStateKey.split('').forEach((x, i) => {
+				boardStateString.split('').forEach((x, i) => {
 					if (x === '0') {
 						beads.push(cellLookup[i]);
 					}
@@ -377,17 +375,19 @@
 			},
 
 			processPlayerPick(data) {
-				if (data.player !== 1) {
-					return;
-				}
-				console.log('processPlayerPick', data);
-
 				// Initialize box if it doesn't exist
 				if (MB.boxes[data.boardStateString] === undefined) {
 					MB.boxes[data.boardStateString] = MB.createInitialBoxValues(data.boardStateString);
-					console.log('MB.boxes', MB.boxes);
 				}
-			}
+
+				if (data.player === 1) {
+
+
+					MB.xMoves[data.boardStateString] = data.cellPlayed;
+				}
+			},
+
+
 		};
 
 		Controller.initialize();
