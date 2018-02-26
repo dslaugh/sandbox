@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		#board {
+			border-collapse: collapse;
+		}
+
+		#board tr td {
+			width: 50px;
+			height: 50px;
+			text-align: center;
+		}
+	</style>
+	<script src="./CustomEvents.js"></script>
+	<script src="./BoardModel.js"></script>
+	<script src="./BoardView.js"></script>
+	<script src="./BoardController.js"></script>
+</head>
+<body>
+	<menu><button id="resetBtn">Reset</button>
+	<table border="1" id="board">
+		<tr>
+			<td id="cell-0"></td>
+			<td id="cell-1"></td>
+			<td id="cell-2"></td>
+		</tr>			
+		<tr>
+			<td id="cell-3"></td>
+			<td id="cell-4"></td>
+			<td id="cell-5"></td>
+		</tr>			
+		<tr>
+			<td id="cell-6"></td>
+			<td id="cell-7"></td>
+			<td id="cell-8"></td>
+		</tr>			
+	</table>
+	<div><button id="computerPlayerBtn">Computer Player</button></div>
+	<p id="message"></p>
+
+	<script>
+		const gameEvents = CustomEvents();
+		const boardModel = BoardModel();
+		const boardView = BoardView();
+		const boardController = BoardController();
+
+
+		boardController.setBoardModel(boardModel);
+		boardController.setBoardView(boardView);
+		boardView.setBoardController(boardController);
+
+		const history = {};
+		const xHistory = [];
+		gameEvents.on('turn-played', (gameData) => {
+			const idx = gameData.boardState.join('');
+			if (gameData.playerTurn === 'O' && (!history[idx])) {
+				history[idx] = createInitialBoxValues(gameData.boardState);
+			}
+			console.log('turn-played gameData', gameData);
+			console.log('turn-played history', history);
+		});
+
+		function createInitialBoxValues(boardState) {
+			const box = [];
+			boardState.forEach((cell, i) => {
+				if (cell === 0) {
+					box.push(i);
+					box.push(i);
+					box.push(i);
+				}
+			});
+			return box;
+		}
+
+		boardController.init();
+	</script>
+</body>
+</html>
