@@ -14,7 +14,7 @@
 		$('#StartBtn').on('click', function() {
 			$.ajax({
 				type: 'GET',
-				url: 'http://localhost:8000/api/start',
+				url: 'http://localhost:8080/api/start',
 				success: function(response) {
 					console.log('response', response);
 				}
@@ -24,7 +24,7 @@
 		$('#StopBtn').on('click', function() {
 			$.ajax({
 				type: 'GET',
-				url: 'http://localhost:8000/api/stop',
+				url: 'http://localhost:8080/api/stop',
 				success: function(response) {
 					console.log('response', response);
 				}
@@ -34,7 +34,7 @@
 		$('#GetNum').on('click', function() {
 			$.ajax({
 				type: 'GET',
-				url: 'http://localhost:8000/api/getNum',
+				url: 'http://localhost:8080/api/getNum',
 				success: function(response) {
 					$('#Num').text(response);
 					console.log('getNum response', response);

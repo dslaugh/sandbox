@@ -58,7 +58,7 @@ Router.route('/api/getNum', function(request, response) {
 });
 
 
-var port = 8000;
+var port = 8080;
 var app = http.createServer(Router.runRoute);
 app.listen(port, function() {
 	console.log('Server running on port ' + port);
