@@ -1,0 +1,180 @@
+<html>
+<head>
+	<style>
+		#board tr td {
+			width: 50px;
+			height: 50px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<table border="1" id="board">
+		<tr>
+			<td id="cell-0"></td>
+			<td id="cell-1"></td>
+			<td id="cell-2"></td>
+		</tr>			
+		<tr>
+			<td id="cell-3"></td>
+			<td id="cell-4"></td>
+			<td id="cell-5"></td>
+		</tr>			
+		<tr>
+			<td id="cell-6"></td>
+			<td id="cell-7"></td>
+			<td id="cell-8"></td>
+		</tr>			
+	</table>
+
+	<script>
+		const CustomEvents = function() {
+			var subscribers = {};
+			return {
+				on: function(topic, fn) {
+					if (typeof topic === 'string' && typeof fn === 'function') {
+						subscribers[topic] = subscribers[topic] || [];
+						subscribers[topic].push(fn);
+					}
+				},
+				off: function(topic, fn) {
+					subscribers[topic].splice(subscribers[topic].indexOf(fn), 1);
+				},
+				emit: function(topic, data) {
+					if (subscribers[topic]) {
+						subscribers[topic].forEach(function(fn) {
+							fn(data);
+						});
+					}
+				}
+			}
+		};
+
+		const BoardModel = {
+			gameStatus: 1,
+			boardState: [0,0,0,0,0,0,0,0,0],
+			playerTurn: 'X',
+			events: CustomEvents(),
+
+			getPlayerTurn() {
+				return this.playerTurn;
+			},
+
+			changePlayerTurn() {
+				this.playerTurn = this.playerTurn === 'X' ? 'O': 'X';
+			},
+
+			getGameState() {
+				return {
+					gameStatus: this.gameStatus,
+					boardState: Array.prototype.slice.call(this.boardState, 0),
+				};
+			},
+
+			setGameStatus(status) {
+				this.gameStatus = status;
+			},
+
+			// TODO: Reconceive this functionality. This should just update the state.
+			// 		 There should be another function that handles a players move.
+			updateBoardState(el) {
+				if (this.gameStatus !== 1) {
+					return;
+				}
+
+				const [x, cellNum] = el.id.split('-');
+				const idx = parseInt(cellNum, 10);
+
+				if (this.boardState[idx] !== 0) {
+					this.events.emit('cell-already-occupied');
+					return;
+				}
+
+
+				this.boardState[idx] = this.playerTurn;
+				this.changePlayerTurn();
+				this.events.emit('board-state-updated', this.getGameState());
+			},
+
+			resetGame() {
+				this.boardState = [0,0,0,0,0,0,0,0,0];
+				this.gameStatus = 1;
+				this.events.emit('board-state-updated', this.getGameState());
+				this.events.emit('game-restarted');
+			}
+		};
+
+		const BoardView = {
+			boardEl: document.querySelector('#board'),
+			cells: {
+				'cell-0': document.querySelector('#cell-0'),
+				'cell-1': document.querySelector('#cell-1'),
+				'cell-2': document.querySelector('#cell-2'),
+				'cell-3': document.querySelector('#cell-3'),
+				'cell-4': document.querySelector('#cell-4'),
+				'cell-5': document.querySelector('#cell-5'),
+				'cell-6': document.querySelector('#cell-6'),
+				'cell-7': document.querySelector('#cell-7'),
+				'cell-8': document.querySelector('#cell-8'),
+			},
+
+			bindUIEvents() {
+				this.boardEl.addEventListener('click', (e) => {
+					BoardController.handleBoardClick(e.target);
+				});
+			},
+
+			renderBoardState(gameState) {
+				gameState.boardState.forEach((state, i) => {
+					let idx = `cell-${i}`;
+					if (state === 0) {
+						BoardView.cells[idx].innerText = '';
+					} else {
+						BoardView.cells[idx].innerText = state;
+					}
+				});
+			}
+		};
+
+		const BoardController = {
+			init() {
+				BoardModel.events.on('board-state-updated', BoardView.renderBoardState.bind(BoardView));
+				BoardModel.events.on('board-state-updated', BoardController.checkGameProgress.bind(BoardController));
+				BoardModel.events.on('board-state-updated', Store.addStuff.bind(Store));
+				BoardView.bindUIEvents();
+			},
+
+			handleBoardClick(el) {
+				BoardModel.updateBoardState(el);
+			},
+
+			checkGameProgress(gameState) {
+				const allCellsPlayed = gameState.boardState.every((cell) => {
+					return cell !== 0;
+				});
+
+				if (allCellsPlayed) {
+					BoardModel.setGameStatus(0);
+					console.log('allCellsPlayed', gameState.boardState);
+					return;
+				}
+
+			},
+
+
+		};
+
+		const Store = {
+			gameStates: {},
+
+			addStuff(gameState) {
+				const boardStateString = gameState.boardState.join('');
+				this.gameStates[boardStateString] = 1;
+				console.log('gameStates', this.gameStates);
+			}
+		};
+
+		BoardController.init();
+	</script>
+</body>
+</html>
