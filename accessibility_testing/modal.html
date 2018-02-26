@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+	<style>
+		#my-modal {
+			border: 1px solid #333;
+			width: 300px;
+			height: 300px;
+			position: absolute;
+			left: 500px;
+			top: 100px;
+			z-index: 2;
+			background-color: #eee;
+		}
+
+		.show {
+			display: block;
+		}
+
+		.hide {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<a href="#" id="one">One</a>
+		<a href="#" id="two">Two</a>
+		<a href="#" id="three">Three</a>
+		<a href="#" id="four">Four</a>		
+	</div>
+
+	<div id="my-modal" class="hide" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+		<h2 id="modal-heading">This is the modal header</h2>
+		<p id="test" tabindex="-1">This is a test of the emergency broadcast system</p>
+		<div><label for="modal_one">First Name</label><input type="text" id="modal_one" /></div>
+		<div><label for="modal_two">Last Name</label><input type="text" id="modal_two" /></div>
+		<div><label for="modal_three">Address</label><input type="text" id="modal_three" /></div>
+		<div><label for="modal_four">Zip</label><input type="text" id="modal_four" /></div>
+		<div><input type="button" id="close_button" value="Close" onClick="hideModal()" /></div>
+	</div>
+	<script>
+		const $one = document.querySelector('#one');
+		const $two = document.querySelector('#two');
+		const $three = document.querySelector('#three');
+		const $four = document.querySelector('#four');
+		const $modal = document.querySelector('#my-modal');
+		const $modal_one = document.querySelector('#modal_one');
+		const $modal_two = document.querySelector('#modal_two');
+		const $modal_three = document.querySelector('#modal_three');
+		const $modal_four = document.querySelector('#modal_four');
+		const $close_button = document.querySelector('#close_button');
+
+		function trapFocus() {
+			$modal.addEventListener('keydown', function (e) {
+				const key = e.which || e.keyCode;
+				const TAB_KEY = 9;
+				const ESC_KEY = 27;
+				if (e.shiftKey && key === TAB_KEY) {
+					if (e.target.id === 'modal_one') {
+						e.preventDefault();
+						$close_button.focus();
+					}
+				} else if (key === TAB_KEY) {
+					if (e.target.id === 'close_button') {
+						e.preventDefault();
+						$modal_one.focus();
+					}
+				} else if (key === ESC_KEY) {
+					hideModal();
+				} else {
+					console.log('neither');
+				}
+			});
+		}
+
+		function showModal() {
+			$modal.classList.remove('hide');
+			$modal.classList.add('show');
+			document.querySelector('#test').focus();
+			trapFocus();
+		}
+
+		function hideModal() {
+			$modal.classList.remove('show');
+			$modal.classList.add('hide');
+			$one.focus();
+		}
+
+		$one.addEventListener('click', function () {
+			showModal();
+		});
+
+		$two.addEventListener('click', function () {
+			hideModal();
+		});
+	</script>
+</body>
+</html>

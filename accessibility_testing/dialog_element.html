@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="./dialog-polyfill.css">
+</head>
+<body>
+	<button id="open_dialog">Open Dialog</button>
+	<dialog id="my_dialog">
+		<h1>My Dialog</h1>
+		<p>This is the text of the dialog. Enjoy...</p>
+		<button id="close_dialog_button">Close</button>
+	</dialog>
+
+	<script src="./dialog-polyfill.js"></script>
+	<script>
+		const openDialogButton = document.querySelector('#open_dialog');
+		const myDialog = document.querySelector('#my_dialog');
+		const closeDialogButton = document.querySelector('#close_dialog_button');
+
+		dialogPolyfill.registerDialog(myDialog);
+
+		openDialogButton.addEventListener('click', function () {
+			myDialog.showModal();
+			closeDialogButton.focus();
+		});
+
+		close_dialog_button.addEventListener('click', function () {
+			myDialog.close();
+			openDialogButton.focus();
+		});
+	</script>
+</body>
+</html>
