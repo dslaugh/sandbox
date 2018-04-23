@@ -1,0 +1,87 @@
+<script type="text/javascript" src="test.js"></script>
+<div id="test" style="width: 300px; height: 300px; padding: 20px; background-color: rgb({{r}}, {{g}}, {{b}}); color: {{fgColor}}">Hello world</div>
+<div>
+	<!--<label>Red: <input id="red" type="text" name="r" /></label>-->
+	<!--<label>Green: <input id="green" type="text" name="g" /></label>-->
+	<!--<label>Blue: <input id="blue" type="text" name="b" /></label>-->
+	<div>
+		<label><input id="red" type="range" min="0" max="255" name="r" /> Red <span id="redVal"></span></label>
+	</div>
+	<div>
+		<label><input id="green" type="range" min="0" max="255" name="g" /> Green <span id="greenVal"></span></label>
+	</div>
+	<div>
+		<label><input id="blue" type="range" min="0" max="255" name="b" /> Blue <span id="blueVal"></span></label>
+	</div>
+
+	<button id="goBtn" type="button">Go!</button>
+</div>
+<script>
+	const goBtn = document.querySelector('#goBtn');
+	const red = document.querySelector('#red');
+	const green = document.querySelector('#green');
+	const blue = document.querySelector('#blue');
+	const myDiv = document.querySelector('#test');
+
+	function setBackgroundColor({ r=0, g=0, b=0 }) {
+		myDiv.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+	}
+
+	function setForegroundColor(fgColor='white') {
+		myDiv.style.color = fgColor;
+	}
+
+	function getSliderValues() {
+		const r = red.value || 0;
+		const g = green.value || 0;
+		const b = blue.value || 0;
+		return { r, g, b };
+	}
+
+	function changeColors(sliderVals) {
+		getColor(sliderVals)
+			.then((data) => {
+				setBackgroundColor(sliderVals);
+				setForegroundColor(data.fgColor);
+			})
+	}
+
+	function updateVals(sliderVals) {
+		document.querySelector('#redVal').innerText = `${sliderVals.r} - ${sliderVals.r / 255}`;
+		document.querySelector('#greenVal').innerText = `${sliderVals.g} - ${sliderVals.g / 255}`;
+		document.querySelector('#blueVal').innerText = `${sliderVals.b} - ${sliderVals.b / 255}`;
+	}
+
+	function updateUI() {
+		const sliderVals = getSliderValues();
+		changeColors(sliderVals);
+		updateVals(sliderVals);
+	}
+
+	red.addEventListener('change', (e) => {
+		updateUI();
+	});
+	green.addEventListener('change', (e) => {
+		updateUI();
+	});
+	blue.addEventListener('change', (e) => {
+		updateUI();
+	});
+
+	goBtn.addEventListener('click', (e) => {
+		e.preventDefault();
+		const formData = {
+			r: red.value || 0,
+			g: green.value || 0,
+			b: blue.value || 0,
+		};
+		getColor(formData)
+			.then((data) => {
+				console.log('returned data', data);
+				myDiv.style.backgroundColor = `rgb(${formData.r}, ${formData.g}, ${formData.b})`;
+				myDiv.style.color = data.fgColor;
+			});
+	});
+
+	updateUI();
+</script>
