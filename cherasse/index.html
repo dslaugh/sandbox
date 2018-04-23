@@ -1,0 +1,15 @@
+<html>
+<head>
+	<script src="./grid.js"></script>
+</head>
+<body>
+	<div id="main"></div>
+	<div id="message"></div>
+	<script>
+		const one = GridItem(99);
+		one.setElement(document.querySelector('#main'));
+		const x = one.getElementId();
+		document.querySelector('#message').innerText = x;
+	</script>
+</body>
+</html>
