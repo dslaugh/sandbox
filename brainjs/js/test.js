@@ -13,12 +13,8 @@ function getColor({ r, g, b}) {
 	// }
 	// xhr.send();
 	return fetch(`/getcolor/${r}/${g}/${b}`)
-		.then((response) => {
-			return response.json();
-		})
-		.then((result) => {
-			return result;
-		})
+		.then(response => response.json())
+		.then(result => result)
 		.catch((err) => {
 			console.log('there was an error', err);
 		});
