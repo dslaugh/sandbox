@@ -1,0 +1,14 @@
+<svg width="400" height="400">
+	<rect width="400" height="400" fill="transparent" stroke="black" />
+	{{#each points}}
+		<circle
+			stroke="black"
+			fill="{{teamColor}}"
+			cx="{{x}}"
+			cy="{{y}}"
+			r="5"
+		/>
+	{{/each}}
+
+	<line x1="0" y1="0" x2="400" y2="400" stroke="purple" />
+</svg>

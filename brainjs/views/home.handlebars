@@ -15,9 +15,11 @@
 	</div>
 
 	<button id="goBtn" type="button">Go!</button>
+	<button id="switchFgColorBtn" type="button">Switch</button>
 </div>
 <script>
 	const goBtn = document.querySelector('#goBtn');
+	const switchFgColorBtn = document.querySelector('#switchFgColorBtn');
 	const red = document.querySelector('#red');
 	const green = document.querySelector('#green');
 	const blue = document.querySelector('#blue');
@@ -81,6 +83,12 @@
 				myDiv.style.backgroundColor = `rgb(${formData.r}, ${formData.g}, ${formData.b})`;
 				myDiv.style.color = data.fgColor;
 			});
+	});
+
+	switchFgColorBtn.addEventListener('click', (e) => {
+		e.preventDefault();
+		const opposite = myDiv.style.color === 'white' ? 'black' : 'white';
+		setForegroundColor(opposite);
 	});
 
 	updateUI();
