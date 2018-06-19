@@ -52,3 +52,7 @@ ol, ul {
 .embolden {
 	font-weight: bold;
 }
+
+.highlight {
+	background-color: #009900;
+}
