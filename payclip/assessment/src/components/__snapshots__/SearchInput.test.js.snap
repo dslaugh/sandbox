@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchInput /> should render correctly 1`] = `
+<input
+  id="search"
+  onKeyUp={[Function]}
+  placeholder="Search..."
+  type="text"
+/>
+`;

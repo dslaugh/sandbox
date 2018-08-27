@@ -1,0 +1,21 @@
+.transactions {
+	display: inline-block;
+	border: 1px solid #333;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+
+.transactions > h2 {
+	padding: 5px 10px;
+	background-color: #cccccc;
+	border-radius: 3px;
+}
+
+.transactions-table {
+	border-collapse: collapse;
+	margin-top: 5px;
+}
+
+.transactions-table > thead > tr {
+	background-color: #efefef;
+}
