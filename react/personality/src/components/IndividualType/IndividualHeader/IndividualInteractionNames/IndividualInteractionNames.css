@@ -1,0 +1,8 @@
+.individual-interaction-names {
+	display: flex;
+	justify-content: space-around;
+	font-weight: bold;
+	margin-top: 5px;
+	padding: 5px;
+	border-bottom: 1px solid #333;
+}

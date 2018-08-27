@@ -1,0 +1,20 @@
+.communication-style-heading {
+	box-sizing: border-box;
+	border: 1px solid #333;
+	display: inline-block;
+	width: 160px;
+	height: 100px;
+	padding: 5px 10px;
+	vertical-align: top;
+}
+
+.communication-style-name {
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: underline;
+	padding-bottom: 8px;
+}
+
+.communication-style-aspect {
+	font-size: 14px;
+}

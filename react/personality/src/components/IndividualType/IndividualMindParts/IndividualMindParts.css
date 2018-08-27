@@ -1,0 +1,6 @@
+.individual-mind-parts {
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	text-align: center;
+}

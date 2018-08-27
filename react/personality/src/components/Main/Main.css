@@ -1,0 +1,14 @@
+.main-container {
+	width: 800px;
+	margin: 0 auto;
+	border: 1px solid #333;
+}
+
+.empty-block {
+	vertical-align: top;
+	border: 1px solid #333;
+	box-sizing: border-box;
+	width: 160px;
+	height: 50px;
+	display: inline-block;
+}

@@ -1,0 +1,43 @@
+.individual-mind-part {
+	width: 399px;
+	box-sizing: border-box;
+	padding: 20px 10px;
+}
+
+.individual-mind-part-top-left {
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+}
+
+.individual-mind-part-top-right {
+	border-bottom: 1px solid #333;
+}
+
+.individual-mind-part-bottom-left {
+	border-right: 1px solid #333;
+}
+
+.individual-mind-part-bottom-right {
+
+}
+
+.individual-mind-part-name {
+	margin: 0 0 10px 0;
+	font-weight: bold;
+	font-size: 26px;
+}
+
+.individual-cognitive-function {
+	display: flex;
+	font-size: 26px;
+	text-align: left;
+	padding: 2px;
+}
+
+.individual-cognitive-function-label {
+	width: 360px;
+}
+
+.individual-cognitive-function-initial {
+	width: 40px;
+}
