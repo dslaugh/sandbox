@@ -7,7 +7,7 @@ export default class TypeLinks extends React.Component {
 	}
 
 	render() {
-		const typeLinks = this.props.types.map(this.createLink.bind(this));
+		const typeLinks = Object.keys(this.props.types).map(this.createLink.bind(this));
 
 		return (
 			<div className="type-links-container">
