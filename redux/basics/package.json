@@ -1,0 +1,22 @@
+{
+  "name": "basics_tutorial",
+  "version": "1.0.0",
+  "description": "This is from the official Redux site.\r https://redux.js.org/basics",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "react-scripts start"
+  },
+  "author": "David Slaugh <dslaugh@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^23.5.0"
+  },
+  "dependencies": {
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
+    "react-scripts": "^1.1.5",
+    "redux": "^4.0.0"
+  }
+}
