@@ -4,7 +4,7 @@ const { SHOW_ALL } = VisibilityFilters;
 
 function todos(state = [], action) {
 	switch (action.type) {
-		case ADD_TODO: {
+		case ADD_TODO:
 			return [
 				...state,
 				{
@@ -12,8 +12,7 @@ function todos(state = [], action) {
 					completed: false,
 				},
 			];
-		}
-		case TOGGLE_TODO: {
+		case TOGGLE_TODO:
 			return state.map((todo, index) => {
 				if (index === action.index) {
 					return Object.assign({}, todo, {
@@ -22,21 +21,17 @@ function todos(state = [], action) {
 				}
 				return todo;
 			});
-		}
-		default: {
+		default:
 			return state;
-		}
 	}
 }
 
 function visibilityFilter(state = SHOW_ALL, action) {
 	switch (action.type) {
-		case SET_VISIBILITY_FILTER: {
+		case SET_VISIBILITY_FILTER:
 			return action.filter;
-		}
-		default: {
+		default:
 			return state;
-		}
 	}
 }
 
