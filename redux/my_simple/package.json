@@ -1,0 +1,16 @@
+{
+  "name": "my_simple",
+  "version": "1.0.0",
+  "description": "This is an attempt to see how well I understand Redux.\r I'm going to try to create a simple app that I've done before.\r It will be a text field which will add things to a list.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0"
+  }
+}
