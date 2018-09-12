@@ -25,25 +25,25 @@ export default class Main extends React.Component {
 				<TemperamentHeading name="Intellectual" initials="NT" />
 				<TemperamentHeading name="Idealist" initials="NF" />
 				<CommunicationStyleHeading name="Structure/In charge" aspect1="Direct" aspect2="Initiating" aspect3="Control" />
-				{ this.createTypeBlock(this.props.typeData.estj.ego) }
-				{ this.createTypeBlock(this.props.typeData.estp.ego) }
-				{ this.createTypeBlock(this.props.typeData.entj.ego) }
-				{ this.createTypeBlock(this.props.typeData.enfj.ego) }
+				{ this.createTypeBlock(this.props.typeData.ESTJ.ego) }
+				{ this.createTypeBlock(this.props.typeData.ESTP.ego) }
+				{ this.createTypeBlock(this.props.typeData.ENTJ.ego) }
+				{ this.createTypeBlock(this.props.typeData.ENFJ.ego) }
 				<CommunicationStyleHeading name="Starter" aspect1="Informative" aspect2="Initiating" aspect3="Movement" />
-				{ this.createTypeBlock(this.props.typeData.esfj.ego) }
-				{ this.createTypeBlock(this.props.typeData.esfp.ego) }
-				{ this.createTypeBlock(this.props.typeData.entp.ego) }
-				{ this.createTypeBlock(this.props.typeData.enfp.ego) }
+				{ this.createTypeBlock(this.props.typeData.ESFJ.ego) }
+				{ this.createTypeBlock(this.props.typeData.ESFP.ego) }
+				{ this.createTypeBlock(this.props.typeData.ENTP.ego) }
+				{ this.createTypeBlock(this.props.typeData.ENFP.ego) }
 				<CommunicationStyleHeading name="See it through" aspect1="Direct" aspect2="Responding" aspect3="Movement" />
-				{ this.createTypeBlock(this.props.typeData.istj.ego) }
-				{ this.createTypeBlock(this.props.typeData.istp.ego) }
-				{ this.createTypeBlock(this.props.typeData.intj.ego) }
-				{ this.createTypeBlock(this.props.typeData.infj.ego) }
+				{ this.createTypeBlock(this.props.typeData.ISTJ.ego) }
+				{ this.createTypeBlock(this.props.typeData.ISTP.ego) }
+				{ this.createTypeBlock(this.props.typeData.INTJ.ego) }
+				{ this.createTypeBlock(this.props.typeData.INFJ.ego) }
 				<CommunicationStyleHeading name="Behind the scenes" aspect1="Informative" aspect2="Responding" aspect3="Control" />
-				{ this.createTypeBlock(this.props.typeData.isfj.ego) }
-				{ this.createTypeBlock(this.props.typeData.isfp.ego) }
-				{ this.createTypeBlock(this.props.typeData.intp.ego) }
-				{ this.createTypeBlock(this.props.typeData.infp.ego) }
+				{ this.createTypeBlock(this.props.typeData.ISFJ.ego) }
+				{ this.createTypeBlock(this.props.typeData.ISFP.ego) }
+				{ this.createTypeBlock(this.props.typeData.INTP.ego) }
+				{ this.createTypeBlock(this.props.typeData.INFP.ego) }
 			</div>
 		);
 	}

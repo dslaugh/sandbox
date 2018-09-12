@@ -3,7 +3,9 @@ import './TypeLinks.css';
 
 export default class TypeLinks extends React.Component {
 	createLink(type) {
-		return <div key={ type } className="type-link" onClick={ () => this.props.onClick(type) }>{ type.toUpperCase() }</div>
+		return (
+			<div key={ type } className="type-link" onClick={ () => this.props.onClick(type) }>{ type.toUpperCase() }</div>
+		);
 	}
 
 	render() {
