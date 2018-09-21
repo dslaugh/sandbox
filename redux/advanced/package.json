@@ -1,0 +1,18 @@
+{
+  "name": "advanced",
+  "version": "1.0.0",
+  "description": "Advanced Redux tutorial from the offical site",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "react-scripts start"
+  },
+  "author": "David Slaugh <dslaugh@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "cross-fetch": "^2.2.2",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  }
+}
