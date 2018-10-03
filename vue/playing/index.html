@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Playing with Vue.js</title>
+</head>
+<body>
+	<div id="app" v-bind:title="titleMessage">
+		{{ message }}
+		<!--<input v-model="message">-->
+		<button v-on:click="reverseMessage">Reverse the message</button>
+		<span v-if="seen">Now you see me.</span>
+		<ul>
+			<todo-item
+				v-for="todo in todos"
+				v-bind:todo="todo"
+				v-bind:key="todo.id"
+			>
+			</todo-item>
+		</ul>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		Vue.component('todo-item', {
+			props: ['todo'],
+			template: '<li>{{ todo.text }}</li>',
+		});
+
+		const app = new Vue({
+		  el: '#app',
+		  data: {
+		  	message: 'Hello world',
+			titleMessage: 'This is the title',
+			seen: true,
+			todos: [
+			  { id: 1, text: 'Todo 1' },
+			  { id: 2, text: 'Todo 2' },
+			  { id: 3, text: 'Todo 3' },
+			],
+		  },
+		  methods: {
+		  	reverseMessage: function () {
+		  		this.message = this.message.split('').reverse().join('');
+			}
+		  }
+		});
+	</script>
+</body>
+</html>
