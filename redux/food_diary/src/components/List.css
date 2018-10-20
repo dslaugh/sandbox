@@ -1,0 +1,15 @@
+.list {
+	border: 1px solid #ccc;
+	margin-right: 10px;
+}
+.list h2 {
+	margin: 0;
+	padding: 2px 5px;
+	background-color: #9acfea;
+}
+.list ul {
+	margin-right: 20px;
+}
+.list li:nth-child(2n + 1) {
+	background-color: #b9def0;
+}
