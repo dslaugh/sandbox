@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import InputForm from './InputForm';
 import List from './List';
 import { sortDesc } from '../helpers/index';
+import './App.css';
 
 const App = ({ days }) => {
 	return (
-		<div style={{display: 'flex'}}>
+		<div className="app-main">
 			<InputForm />
 			{
 				Object.keys(days).sort(sortDesc).map((day) => {

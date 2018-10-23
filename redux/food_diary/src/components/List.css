@@ -1,6 +1,6 @@
 .list {
 	border: 1px solid #ccc;
-	margin-right: 10px;
+	margin: 0 10px 10px 0;
 }
 .list h2 {
 	margin: 0;
