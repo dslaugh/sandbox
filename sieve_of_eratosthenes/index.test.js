@@ -65,7 +65,7 @@ describe('reverse polish notation calculator', () => {
 		}).toThrow('There are too many operators');
 	});
 
-	test('it should throw an error if an operator is not an integer', () => {
+	test('it should throw an error if an operand is not an integer', () => {
 		const str = '2 3 z + *';
 		expect(() => {
 			reversePolishNotationCalculator(str);
