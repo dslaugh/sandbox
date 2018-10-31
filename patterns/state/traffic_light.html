@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Traffic Light</title>
+	<script src="./traffic_light.js"></script>
+	<style>
+		.face {
+			display: inline-block;
+			width: 200px;
+			border: 1px solid black;
+			position: absolute;
+		}
+		.face h3 {
+			text-align: center;
+		}
+		.north {
+			top: 0;
+			left: 400px;
+		}
+		.south {
+			top: 260px;
+			left: 400px;
+		}
+		.east {
+			top: 120px;
+			left: 615px;
+		}
+		.west {
+			top: 120px;
+			left: 185px;
+		}
+		.light {
+			display: block;
+			margin: 10px auto;
+			width: 50px;
+			height: 50px;
+			border-radius: 25px;
+			border: 1px solid #cccccc;
+		}
+		.black {
+			background-color: white;
+		}
+		.red {
+			background-color: red;
+		}
+		.yellow {
+			background-color: yellow;
+		}
+		.green {
+			background-color: green;
+		}
+	</style>
+</head>
+<body style="position: relative;">
+	<div class="face north">
+		<h3>North</h3>
+		<div class="black light" id="north_red"></div>
+		<div class="black light" id="north_yellow"></div>
+		<div class="green light" id="north_green"></div>
+	</div>
+	<div class="face south">
+		<h3>South</h3>
+		<div class="black light" id="south_red"></div>
+		<div class="black light" id="south_yellow"></div>
+		<div class="green light" id="south_green"></div>
+	</div>
+	<div class="face east">
+		<h3>East</h3>
+		<div class="red light" id="east_red"></div>
+		<div class="black light" id="east_yellow"></div>
+		<div class="black light" id="east_green"></div>
+	</div>
+	<div class="face west">
+		<h3>West</h3>
+		<div class="red light" id="west_red"></div>
+		<div class="black light" id="west_yellow"></div>
+		<div class="black light" id="west_green"></div>
+	</div>
+	<script>
+		const trafficLight = new TrafficLight();
+		trafficLight.run();
+	</script>
+</body>
+</html>
