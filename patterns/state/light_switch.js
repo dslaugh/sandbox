@@ -164,10 +164,70 @@ class LightSwitch {
 }
 
 
-const lightSwitch = new LightSwitch();
+// const lightSwitch = new LightSwitch();
+//
+// // lightSwitch.initialize();
+// lightSwitch.turnOff();
+// lightSwitch.turnOn();
+// lightSwitch.turnOn();
+// lightSwitch.turnOff();
 
-// lightSwitch.initialize();
-lightSwitch.turnOff();
-lightSwitch.turnOn();
-lightSwitch.turnOn();
-lightSwitch.turnOff();
+function Test() {
+	const states = {
+		on: {
+			execute() {
+				console.log('The switch flips and the light turns on');
+			},
+			turnOn() {
+				console.log('The light is already on');
+			},
+			turnOff() {
+				changeState(states.off);
+			},
+		},
+		off: {
+			execute() {
+				console.log('The switch flips and the light turns off');
+			},
+			turnOn() {
+				changeState(states.on);
+			},
+			turnOff() {
+				console.log('The light is already off');
+			},
+		},
+	};
+	let state = states.off;
+
+	function changeState(newState) {
+		state = newState;
+		state.execute();
+	}
+
+	function turnOn() {
+		console.log('Attempting to turn it on');
+		state.turnOn();
+	}
+
+	function turnOff() {
+		console.log('Attempting to turn it off');
+		state.turnOff();
+	}
+
+	return {
+		turnOn,
+		turnOff,
+	};
+}
+
+const test1 = Test();
+test1.turnOn();
+test1.turnOn();
+test1.turnOff();
+test1.turnOff();
+
+// const test2 = Test();
+// test2.turnOff();
+// test2.turnOff();
+// test2.turnOn();
+// test2.turnOn();
