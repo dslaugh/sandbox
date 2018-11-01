@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>FetchButton Test</title>
-	<script src="./fetch_button.js"></script>
+	<title>FetchStateMachine Test</title>
+	<script src="./fetch_state_machine.js"></script>
 </head>
 <body>
 	<button id="gundeals_button" type="button">Get it!</button>
@@ -12,7 +12,7 @@
 	<script>
 	  const button = document.getElementById('gundeals_button');
 	  const resultsContainer = document.getElementById('results');
-	  const gundealsButton = new FetchButton();
+	  const gundealsFetcher = new FetchStateMachine();
 
 	  function render(data) {
 	  	let markup = '<ul>';
@@ -25,7 +25,7 @@
 
 	  button.addEventListener('click', (e) => {
 	  	e.preventDefault();
-	  	gundealsButton.fetch('https://www.reddit.com/r/gundeals/search.json?q=22lr&limit=50')
+	  	gundealsFetcher.fetch('https://www.reddit.com/r/gundeals/search.json?q=22lr&limit=50')
 		  .then(results => results.json())
 		  .then((json) => {
 		  	console.log('Ready...');

@@ -22,7 +22,8 @@ class DisabledState {
 	}
 }
 
-class FetchButton {
+
+class FetchStateMachine {
 	constructor() {
 		this.states = {
 			ready: new ReadyState(this),
