@@ -172,7 +172,7 @@ class LightSwitch {
 // lightSwitch.turnOn();
 // lightSwitch.turnOff();
 
-function Test() {
+function FactoryFunctionLightSwitch() {
 	const states = {
 		on: {
 			execute() {
@@ -220,13 +220,13 @@ function Test() {
 	};
 }
 
-const test1 = Test();
+const test1 = FactoryFunctionLightSwitch();
 test1.turnOn();
 test1.turnOn();
 test1.turnOff();
 test1.turnOff();
 
-// const test2 = Test();
+// const test2 = FactoryFunctionLightSwitch();
 // test2.turnOff();
 // test2.turnOff();
 // test2.turnOn();
