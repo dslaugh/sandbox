@@ -63,7 +63,7 @@ class BST {
 		return current.data;
 	}
 
-	// The algorithm is basically
+	// The algorithm is basically:
 	// Check to see if the search value is equal to, less than or greater than the root node's data property.
 	// If it's less than, go left.
 	// If it's greater than, go right.
