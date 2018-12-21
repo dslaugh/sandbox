@@ -1,0 +1,17 @@
+{
+  "name": "platform_game",
+  "version": "1.0.0",
+  "description": "This is from the 3rd edition of eloquent javascript",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.1.2"
+  }
+}

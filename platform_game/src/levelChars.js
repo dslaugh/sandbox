@@ -2,7 +2,7 @@ const Player = require('./Player');
 const Lava = require('./Lava');
 const Coin = require('./Coin');
 
-module.exports = {
+const levelChars = {
 	'.': 'empty',
 	'#': 'wall',
 	'+': 'lava',
@@ -12,3 +12,5 @@ module.exports = {
 	'|': Lava,
 	'v': Lava,
 };
+
+module.exports = levelChars;
