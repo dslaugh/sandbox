@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pixel Art Editor</title>
+</head>
+<body>
+<div></div>
+<script src="./index.js"></script>
+<script>
+	const state = {
+		tool: 'draw',
+		color: '#000000',
+		picture: Picture.empty(30, 30, '#f0f0f0'),
+		done: [],
+		doneAt: 0,
+	};
+	const pixelEditor = startPixelEditor({ state });
+	document.querySelector('div').appendChild(pixelEditor);
+</script>
+</body>
+</html>
