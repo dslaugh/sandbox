@@ -1,4 +1,5 @@
 const DOMDisplay = require('./DOMDisplay');
+const CanvasDisplay = require('./CanvasDisplay');
 const Level = require('./Level');
 const State = require('./State');
 const gameLevels = require('./gameLevels');
@@ -39,6 +40,6 @@ async function runGame(plans, Display) {
 }
 
 
-runGame(gameLevels, DOMDisplay).then(() => {
+runGame(gameLevels, CanvasDisplay).then(() => {
 	console.log('Game over');
 });

@@ -68,6 +68,12 @@ function runAnimation(frameFunc) {
 	requestAnimationFrame(frame);
 }
 
+function flipHorizontally(context, around) {
+	context.translate(around, 0);
+	context.scale(-1, 1);
+	context.translate(-around, 0);
+}
+
 module.exports = {
 	elt,
 	drawGrid,
@@ -75,4 +81,5 @@ module.exports = {
 	overlap,
 	trackKeys,
 	runAnimation,
+	flipHorizontally,
 };
