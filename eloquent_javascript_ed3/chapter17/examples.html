@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas/SVG</title>
+</head>
+<body>
+
+	<svg xmlns="http://www.w3.org/2000/svg">
+		<circle r="50" cx="50" cy="50" fill="red" />
+		<rect x="120" y="5" width="90" height="90" stroke="blue" fill="none" />
+	</svg>
+	<p>Before canvas 1</p>
+	<canvas id="canvas1" width="120"></canvas>
+	<p>Before canvas 2</p>
+	<canvas id="canvas2"></canvas>
+	<p>Before canvas 3</p>
+	<canvas id="canvas3"></canvas>
+	<p>Before canvas 4</p>
+	<canvas id="canvas4"></canvas>
+	<p>Before canvas 5</p>
+	<canvas id="canvas5"></canvas>
+	<p>Before canvas 6</p>
+	<canvas id="canvas6"></canvas>
+	<p>Before canvas 7</p>
+	<canvas id="canvas7"></canvas>
+	<p>Before canvas 8</p>
+	<canvas id="canvas8"></canvas>
+	<p>Before canvas 9</p>
+	<canvas id="canvas9"></canvas>
+	<p>Before canvas 10</p>
+	<canvas id="canvas10"></canvas>
+	<p>Before canvas 11</p>
+	<canvas id="canvas11"></canvas>
+	<p>Before canvas 12</p>
+	<canvas id="canvas12"></canvas>
+	<p>Before canvas 13</p>
+	<canvas id="canvas13" width="600" height="300"></canvas>
+	<script>
+		let canvas1 = document.querySelector('#canvas1');
+		let context = canvas1.getContext('2d');
+		context.fillStyle = 'red';
+		context.fillRect(10, 10, 100, 50);
+
+		let canvas2 = document.querySelector('#canvas2').getContext('2d');
+		canvas2.strokeStyle = 'blue';
+		canvas2.strokeRect(5, 5, 50, 50);
+		canvas2.lineWidth = 5;
+		canvas2.strokeRect(135, 5, 50, 50);
+
+		let canvas3 = document.querySelector('#canvas3').getContext('2d');
+		canvas3.beginPath();
+		for (let y = 10; y < 100; y += 10) {
+			canvas3.moveTo(10, y);
+			canvas3.lineTo(90, y);
+		}
+		canvas3.stroke();
+
+		let canvas4 = document.querySelector('#canvas4').getContext('2d');
+		canvas4.beginPath();
+		canvas4.moveTo(50, 10);
+		canvas4.lineTo(10, 70);
+		canvas4.lineTo(90, 70);
+		canvas4.fill();
+
+		let canvas5 = document.querySelector('#canvas5').getContext('2d');
+		canvas5.beginPath();
+		canvas5.moveTo(10, 90);
+		canvas5.quadraticCurveTo(60, 10, 90, 90);
+		canvas5.lineTo(60, 10);
+		canvas5.closePath();
+		canvas5.stroke();
+
+		let canvas6 = document.querySelector('#canvas6').getContext('2d');
+		canvas6.beginPath();
+		canvas6.moveTo(10, 90);
+		canvas6.bezierCurveTo(10, 10, 90, 10, 50, 90);
+		canvas6.lineTo(90, 10);
+		canvas6.lineTo(10, 10);
+		canvas6.closePath();
+		canvas6.stroke();
+
+		let canvas7 = document.querySelector('#canvas7').getContext('2d');
+		canvas7.beginPath();
+		canvas7.arc(50, 50, 40, 0, 7);
+		canvas7.arc(150, 50, 40, 0, 0.5 * Math.PI);
+		canvas7.stroke();
+
+		let canvas8 = document.querySelector('#canvas8').getContext('2d');
+		canvas8.font = 'italic 28px Georgia';
+		canvas8.fillStyle = 'fuchsia';
+		canvas8.fillText('I can draw text too!', 10, 50);
+
+		let canvas9 = document.querySelector('#canvas9').getContext('2d');
+		let img = document.createElement('img');
+		img.src = './elkt.gif';
+		img.addEventListener('load', () => {
+			for (let x = 10; x < 200; x += 30) {
+				canvas9.drawImage(img, x, 10, 30, 30);
+			}
+		});
+
+		let canvas10 = document.querySelector('#canvas10').getContext('2d');
+		let img2 = document.createElement('img');
+		img2.src = './player_big.png';
+		let spriteW = 48;
+		let spriteH = 60;
+		img2.addEventListener('load', () => {
+			let cycle = 0;
+			setInterval(() => {
+				canvas10.clearRect(0, 0, spriteW, spriteH);
+				canvas10.drawImage(img2, cycle * spriteW, 0, spriteW, spriteH, 0, 0, spriteW, spriteH);
+				cycle = (cycle + 1) % 8;
+			}, 120);
+		});
+
+		let canvas11 = document.querySelector('#canvas11').getContext('2d');
+		canvas11.scale(3, .5);
+		canvas11.beginPath();
+		canvas11.arc(50, 50, 40, 0, 7);
+		canvas11.lineWidth = 3;
+		canvas11.stroke();
+
+			function flipHorizontally(context, around) {
+				context.translate(around, 0);
+				context.scale(-1, 1);
+				context.translate(-around, 0);
+			}
+		let canvas12 = document.querySelector('#canvas12').getContext('2d');
+		let img3 = document.createElement('img');
+		img3.src = './player_big.png';
+		img3.addEventListener('load', () => {
+			flipHorizontally(canvas12, 100 + spriteW / 2);
+			canvas12.drawImage(img3, 0, 0, spriteW, spriteH, 100, 0, spriteW, spriteH);
+		});
+
+		let canvas13 = document.querySelector('#canvas13').getContext('2d');
+		function branch(length, angle, scale) {
+			canvas13.fillRect(0, 0, 1, length);
+			if (length < 8 ) {
+				return;
+			}
+			canvas13.save();
+			canvas13.translate(0, length);
+			canvas13.rotate(-angle);
+			branch(length * scale, angle, scale);
+			canvas13.rotate(2 * angle);
+			branch(length * scale, angle, scale);
+			canvas13.restore();
+		}
+		canvas13.translate(300, 0);
+		branch(60, 0.5, 0.8);
+
+	</script>
+</body>
+</html>

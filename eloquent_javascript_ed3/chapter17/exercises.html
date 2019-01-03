@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Exercises</title>
+</head>
+<body>
+
+<canvas id="bouncingBall" width="400" height="400"></canvas>
+<canvas id="shapes" width="600" height="200"></canvas>
+<script>
+	let canvas = document.querySelector("#bouncingBall");
+	let cx = canvas.getContext("2d");
+
+	let lastTime = null;
+	function frame(time) {
+		if (lastTime != null) {
+			updateAnimation(Math.min(100, time - lastTime) / 1000);
+		}
+		lastTime = time;
+		requestAnimationFrame(frame);
+	}
+	requestAnimationFrame(frame);
+
+	let ball = {
+		left: 40,
+		top: 40,
+		radius: 30,
+	  	xSpeed: 200,
+	  	ySpeed: 125,
+	};
+	function updateAnimation(step) {
+		cx.clearRect(0, 0, canvas.width, canvas.height);
+		cx.strokeRect(0, 0, canvas.width, canvas.height);
+		cx.beginPath();
+		if ((ball.left + ball.radius > canvas.width - 1) || (ball.left - ball.radius <= 1)) {
+			ball.xSpeed = -ball.xSpeed;
+		}
+		if ((ball.top + ball.radius > canvas.height - 1) || (ball.top - ball.radius <= 1)) {
+			ball.ySpeed = -ball.ySpeed;
+		}
+		cx.arc(ball.left, ball.top, ball.radius, 0, 2 * Math.PI);
+		cx.fillStyle = 'red';
+		cx.fill();
+		ball.left += ball.xSpeed * step;
+		ball.top += ball.ySpeed * step;
+	}
+
+
+	function trapezoid(context, center, topWidth=20, bottomWidth=40, height=20) {
+		const topLeft = {
+			x: center.x - (topWidth / 2),
+			y: center.y - (height / 2),
+		};
+		const topRight = {
+			x: center.x + (topWidth / 2),
+			y: center.y - (height / 2),
+		};
+		const bottomRight = {
+			x: center.x + (bottomWidth / 2),
+			y: center.y + (height / 2),
+		};
+		const bottomLeft = {
+			x: center.x - (bottomWidth / 2),
+			y: center.y + (height / 2),
+		};
+
+		context.beginPath();
+		context.moveTo(topLeft.x, topLeft.y);
+		context.lineTo(topRight.x, topRight.y);
+		context.lineTo(bottomRight.x, bottomRight.y);
+		context.lineTo(bottomLeft.x, bottomLeft.y);
+		context.closePath();
+		context.stroke();
+	}
+
+	function diamond(context, center, size=30, color='red') {
+		const topLeft = {
+			x: center.x - (size / 2),
+			y: center.y - (size / 2),
+		};
+		context.translate(center.x, center.y);
+		context.rotate(Math.PI * .25);
+		context.translate(-center.x, -center.y);
+		context.fillStyle = color;
+		context.fillRect(topLeft.x, topLeft.y, size, size);
+		context.resetTransform();
+	}
+
+	function zigzag(context, start, length=50, zagHeight=5, numZags=12) {
+		context.beginPath();
+		context.moveTo(start.x, start.y);
+		let current = {
+			x: start.x,
+		  	y: start.y,
+		};
+		for (let i=0; i<numZags; i++) {
+			current.x += i % 2 === 0 ? length : -length;
+			current.y += zagHeight;
+			context.lineTo(current.x, current.y);
+		}
+		context.stroke();
+	}
+
+	function spiral(context, center) {
+		let radius = 50;
+		let current = {
+			x: center.x,
+		  	y: center.y,
+		};
+		context.beginPath();
+		context.moveTo(current.x, current.y);
+
+		for (let i = 0; i < 300; i += 1) {
+			let angle = i * Math.PI / 30;
+			let dist = radius * i / 300;
+			let x = current.x + (Math.cos(angle) * dist);
+			let y = current.y + (Math.sin(angle) * dist);
+			context.lineTo(x, y);
+		}
+
+		context.stroke();
+	}
+
+	function spiral2(context, center) {
+		let radius = 2;
+		let current = {
+			x: center.x,
+			y: center.y,
+		};
+		let lineSize = 2;
+		context.beginPath();
+
+		for (let i = 0; i < 100; i++) {
+			let radians = Math.PI * (i / 10);
+			current.x = center.x + (Math.cos(radians) * radius);
+			current.y = center.y + (Math.sin(radians) * radius);
+			context.moveTo(current.x, current.y);
+			context.lineTo(current.x + lineSize, current.y);
+			radius += i / 100;
+		}
+
+		context.stroke();
+	}
+
+	function star(context, center, radius=50, points=8) {
+		context.beginPath();
+		context.moveTo(center.x + radius, center.y);
+		for (let i = 0; i < points; i++) {
+			const endPointRadians = (Math.PI * 2) * (i + 1) / points;
+			const endPointPos = {
+				x: center.x + (Math.cos(endPointRadians) * radius),
+				y: center.y + (Math.sin(endPointRadians) * radius),
+			};
+			context.quadraticCurveTo(center.x, center.y, endPointPos.x, endPointPos.y);
+		}
+		context.fillStyle = 'gold';
+		context.fill();
+	}
+
+	const shapesCanvas = document.querySelector('#shapes');
+	const shapesCtx = shapesCanvas.getContext('2d');
+	trapezoid(shapesCtx, { x: 30, y: 25 }, 30, 50, 30);
+	diamond(shapesCtx, { x: 90, y: 25 });
+	zigzag(shapesCtx, { x: 130, y: 10 });
+	spiral(shapesCtx, { x: 250, y: 50 });
+	spiral2(shapesCtx, { x: 350, y: 50 });
+	star(shapesCtx, { x: 460, y: 50 }, 50, 8);
+
+
+</script>
+</body>
+</html>
