@@ -146,7 +146,7 @@ class Game extends React.Component {
 		const gameStatus = getGameStatus(current.squares);
 
 		if (this.state.sortDir === 'desc') {
-			history.sort((a, b) => a.moveNum < b.moveNum);
+			history.sort((a, b) => b.moveNum - a.moveNum);
 		}
 
 		const moves = history.map((step) => {
