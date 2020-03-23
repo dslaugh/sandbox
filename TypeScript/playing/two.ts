@@ -62,7 +62,7 @@ function moveBall(time) {
     myBall.style.top = '770px';
     ballObj.top = 770;
     dir = 'up';
-    if (maxHeight > 768) {
+    if (maxHeight > 766) {
       return false;
     }
 

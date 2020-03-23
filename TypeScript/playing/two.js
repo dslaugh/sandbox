@@ -1,14 +1,14 @@
 function runAnimation(fn) {
-    let lastTime = null;
-    let count = 0;
+    var lastTime = null;
+    var count = 0;
     function frame(time) {
         // if (count === 100) {
         //   return;
         // }
         // count++;
         if (lastTime !== null) {
-            let stepTime = Math.min((time - lastTime), 100) / 1000;
-            const result = fn(stepTime);
+            var stepTime = Math.min((time - lastTime), 100) / 1000;
+            var result = fn(stepTime);
             if (result === false) {
                 return;
             }
@@ -21,18 +21,18 @@ function runAnimation(fn) {
 function printTime(time) {
     console.log('stepTime', time);
 }
-const myBall = document.getElementById('ball');
-const ballObj = {
+var myBall = document.getElementById('ball');
+var ballObj = {
     left: 0,
-    top: 0,
+    top: 0
 };
-const speedEl = document.getElementById('speed');
-let speed = 0;
-const rate = 10;
-const friction = 10;
-let dir = 'down';
-let count = 0;
-let maxHeight = 0;
+var speedEl = document.getElementById('speed');
+var speed = 0;
+var rate = 10;
+var friction = 10;
+var dir = 'down';
+var count = 0;
+var maxHeight = 0;
 function moveBall(time) {
     // ballObj.left += time * speed;
     if (dir === 'down') {
@@ -45,7 +45,7 @@ function moveBall(time) {
         ballObj.top -= time * speed;
         speed -= rate + friction;
     }
-    speedEl.innerText = `Speed ${speed}. maxHeight: ${maxHeight}`;
+    speedEl.innerText = "Speed " + speed + ". maxHeight: " + maxHeight;
     // console.log('moveBall', 'speed', speed);
     // myBall.style.left = `${ballObj.left}px`;
     if (ballObj.top >= 770) {
@@ -53,7 +53,7 @@ function moveBall(time) {
         myBall.style.top = '770px';
         ballObj.top = 770;
         dir = 'up';
-        if (maxHeight > 768) {
+        if (maxHeight > 766) {
             return false;
         }
         // count++;
@@ -73,7 +73,7 @@ function moveBall(time) {
     //   ballObj.top = 0;
     //   dir = 'down';
     // }
-    myBall.style.top = `${ballObj.top}px`;
+    myBall.style.top = ballObj.top + "px";
     return true;
 }
 runAnimation(moveBall);
