@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    volumes:
+    - todo-mysql-data:/var/lib/mysql
+    environment:
+      COMPOSE_CONVERT_WINDOWS_PATHS: 1
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+volumes:
+  todo-mysql-data:
+    external:
+      name:
+        todo-mysql-data
