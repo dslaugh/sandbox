@@ -1,0 +1,1 @@
+https://medium.com/iqoqo-engineering/write-beautiful-oo-classes-with-typescript-d708cc9fd9c3
