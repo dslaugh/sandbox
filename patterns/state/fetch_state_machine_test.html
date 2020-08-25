@@ -15,25 +15,25 @@
 	  const gundealsFetcher = new FetchStateMachine();
 
 	  function render(data) {
-	  	let markup = '<ul>';
-	  	data.forEach((d) => {
-	  		markup += `<li>${d.data.title}</li>`;
-		});
-		markup += '</ul>';
-		return markup;
-	  }
+      let markup = '<ul>';
+      data.forEach((d) => {
+        markup += `<li>${d.data.title}</li>`;
+      });
+      markup += '</ul>';
+      return markup;
+    }
 
 	  button.addEventListener('click', (e) => {
 	  	e.preventDefault();
 	  	gundealsFetcher.fetch('https://www.reddit.com/r/gundeals/search.json?q=22lr&limit=50')
-		  .then(results => results.json())
-		  .then((json) => {
-		  	console.log('Ready...');
-			resultsContainer.innerHTML = render(json.data.children);
-		  })
-		  .catch((error) => {
-		  	console.log(error);
-		  });
+        .then(results => results.json())
+        .then((json) => {
+          console.log('Ready...');
+          resultsContainer.innerHTML = render(json.data.children);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 	  });
 	</script>
 </body>
